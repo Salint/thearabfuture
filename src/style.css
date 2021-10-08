@@ -1,9 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200&display=swap');
 
+:root {
+	--main-color: #4150ff;
+
+	--primary-background: rgb(238, 238, 238);
+	--secondary-background: rgb(218, 218, 218);
+
+	--primary-text: black;
+	--secondary-text: rgb(129, 129, 129);
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Tajawal', sans-serif;
 	direction: rtl;
+}
+
+body {
+	background: var(--primary-background);
 }
