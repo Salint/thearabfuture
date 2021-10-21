@@ -6,7 +6,7 @@ import Logo from "../../static/images/logo32.png";
 
 const Nav = styled.nav`
 	display: flex;
-	padding: 10px 20px;
+	padding: 10px 50px;
 	height: 60px;
 	align-items: center;
 	color: ${props => props.theme === "light" ? "white" : "black" };

@@ -2,9 +2,10 @@ import React from "react";
 
 import NavigationBar from "../organisms/Navbar";
 
-const PageTemplate = ({ navbar }) => (
+const PageTemplate = ({ navbar, children }) => (
 	<>
-		{ navbar !== "off" && <NavigationBar float theme="light"/> }
+		{ navbar !== "off" && <NavigationBar float /> }
+		{ children }
 	</>
 );
 
