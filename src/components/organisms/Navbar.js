@@ -6,11 +6,13 @@ import Logo from "../../static/images/logo32.png";
 
 const Nav = styled.nav`
 	display: flex;
-	padding: 10px;
+	padding: 10px 20px;
 	height: 60px;
 	align-items: center;
+	color: ${props => props.theme === "light" ? "white" : "black" };
 	${props => props.float && css`
 		background: var(--primary-background);
+		border-bottom: 1px solid rgb(220, 220, 220);
 		position: fixed;
 		width: 100%;
 		top: 0;
@@ -42,12 +44,12 @@ const NavLink = styled(Link)`
 	font-size: 20px;
 `;
 
-const NavigationBar = ({ float }) => (
-	<Nav float={float}>
+const NavigationBar = ({ float, theme }) => (
+	<Nav float={float} theme={theme}>
 		<Container>
 			<Link to="/"><Image src={Logo} alt="The Arab Future" /></Link>
 		</Container>
-		<Container place="center">
+		<Container place="flex-end">
 			<UL>
 				<NavLink to="/articles"><li>مقالات</li></NavLink>
 				<NavLink to="/questions"><li>اسئلة</li></NavLink>

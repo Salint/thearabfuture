@@ -4,7 +4,7 @@ import NavigationBar from "../organisms/Navbar";
 
 const PageTemplate = ({ navbar }) => (
 	<>
-		{ navbar !== "off" && <NavigationBar float /> }
+		{ navbar !== "off" && <NavigationBar float theme="light"/> }
 	</>
 );
 

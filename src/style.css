@@ -3,8 +3,8 @@
 :root {
 	--main-color: #4150ff;
 
-	--primary-background: rgb(238, 238, 238);
-	--secondary-background: rgb(218, 218, 218);
+	--primary-background: white;
+	--secondary-background: rgb(231, 231, 231);
 
 	--primary-text: black;
 	--secondary-text: rgb(129, 129, 129);
