@@ -24,9 +24,17 @@ const Section = styled.section`
 `;
 const H1 = styled.section`
 	font-size: 50px;
+	
+	@media(max-width: 500px) {
+		font-size: 30px;
+	}
 `;
 const H4 = styled.section`
 	font-size: 30px;
+	
+	@media(max-width: 500px) {
+		font-size: 20px;
+	}
 `;
 
 const HomePageTemplate = () => (
