@@ -12,16 +12,29 @@ const Header = styled.nav`
 	background-size: cover;
 	color: white;
 	height: 100vh;
+	overflow: hidden;
+	position: relative;
 `;
 const Section = styled.section`
-	text-align: center;
-	padding-top: 30vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 80%;
 `;
 const H1 = styled.section`
 	font-size: 50px;
+	
+	@media(max-width: 500px) {
+		font-size: 30px;
+	}
 `;
 const H4 = styled.section`
 	font-size: 30px;
+	
+	@media(max-width: 500px) {
+		font-size: 20px;
+	}
 `;
 
 const HomePageTemplate = () => (

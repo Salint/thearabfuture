@@ -60,11 +60,11 @@ const UL = styled.ul`
 		align-items: flex-start;
 		background: rgba(0, 0, 0, 0.8);
 		height: 100%;
-		width: 30%;
+		width: 60%;
 		padding-top: 50px;
 		z-index: 0;
 		top: 0;
-		left: ${props => props.active ? "0" : "-30%"};
+		left: ${props => props.active ? "0" : "-60%"};
 		overflow: hidden;
 		transition: left .5s;
 	}
@@ -75,6 +75,11 @@ const NavLink = styled(Link)`
 	margin: 0 10px;
 	font-size: 20px;
 	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
+	
+	@media (max-width: 1000px) {
+		font-size: 30px;
+		margin: 10px 10px;
+	}
 `;
 const Button = styled.button`
 	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
