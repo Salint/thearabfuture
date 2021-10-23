@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Logo from "../../static/images/logo32.png";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { AuthProvider, IfFirebaseUnAuthed } from "../../context/FirebaseAuthContext";
 
 const Nav = styled.nav`
 	display: flex;
@@ -104,6 +105,11 @@ const NavigationBar = ({ float, theme }) => {
 					<NavLink to="/articles" theme={theme}><li>مقالات</li></NavLink>
 					<NavLink to="/questions" theme={theme}><li>اسئلة</li></NavLink>
 					<NavLink to="/projects" theme={theme}><li>المشاريع</li></NavLink>
+					<AuthProvider>
+						<IfFirebaseUnAuthed>
+							<NavLink to="/auth/login" theme={theme}><li>تسجيل الدخول</li></NavLink>
+						</IfFirebaseUnAuthed>
+					</AuthProvider>
 				</UL>
 			</Container>
 			<BarContainer>
