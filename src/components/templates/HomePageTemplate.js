@@ -5,6 +5,9 @@ import PageTemplate from "./PageTemplate";
 
 import NavigationBar from "../organisms/Navbar";
 
+import Introduction from "../molecules/home/Introduction";
+import Acceptance from "../molecules/home/Acceptance";
+
 import HeaderImage from "../../static/images/header.png"
 
 const Header = styled.nav`
@@ -22,16 +25,16 @@ const Section = styled.section`
 	justify-content: center;
 	height: 80%;
 `;
-const H1 = styled.section`
+const H1 = styled.p`
 	font-size: 50px;
 	
 	@media(max-width: 500px) {
 		font-size: 30px;
 	}
 `;
-const H4 = styled.section`
+const H4 = styled.p`
 	font-size: 30px;
-	
+
 	@media(max-width: 500px) {
 		font-size: 20px;
 	}
@@ -46,6 +49,8 @@ const HomePageTemplate = () => (
 				<H4>مقر كل مبرمج عربي...</H4>
 			</Section>
 		</Header>
+		<Introduction />
+		<Acceptance />
 	</PageTemplate>
 );
 
