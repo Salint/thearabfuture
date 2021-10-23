@@ -58,7 +58,7 @@ const UL = styled.ul`
 		position: absolute;
 		flex-direction: column;
 		align-items: flex-start;
-		background: rgba(0, 0, 0, 0.5);
+		background: rgba(0, 0, 0, 0.8);
 		height: 100%;
 		width: 30%;
 		padding-top: 50px;
