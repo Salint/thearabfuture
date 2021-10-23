@@ -11,7 +11,7 @@ const Nav = styled.nav`
 	padding: 10px 50px;
 	height: 60px;
 	align-items: center;
-	color: ${props => props.theme === "light" ? "white" : "black" };
+	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
 	${props => props.float && css`
 		background: var(--primary-background);
 		border-bottom: 1px solid rgb(220, 220, 220);
@@ -72,12 +72,12 @@ const UL = styled.ul`
 
 const NavLink = styled(Link)`
 	text-decoration: none;
-	color: var(--main-text-color);
 	margin: 0 10px;
 	font-size: 20px;
+	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
 `;
 const Button = styled.button`
-	color: white;
+	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
 	background: none;
 	border: none;
 	font-size: 32px;
@@ -95,10 +95,10 @@ const NavigationBar = ({ float, theme }) => {
 				<Link to="/"><Image src={Logo} alt="The Arab Future" /></Link>
 			</Container>
 			<Container place="flex-end">
-				<UL active={active}>
-					<NavLink to="/articles"><li>مقالات</li></NavLink>
-					<NavLink to="/questions"><li>اسئلة</li></NavLink>
-					<NavLink to="/projects"><li>المشاريع</li></NavLink>
+				<UL active={active} theme={theme}>
+					<NavLink to="/articles" theme={theme}><li>مقالات</li></NavLink>
+					<NavLink to="/questions" theme={theme}><li>اسئلة</li></NavLink>
+					<NavLink to="/projects" theme={theme}><li>المشاريع</li></NavLink>
 				</UL>
 			</Container>
 			<BarContainer>
