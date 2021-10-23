@@ -55,7 +55,7 @@ const UL = styled.ul`
 	list-style-type: none;
 
 	@media (max-width: 1000px) {
-		position: absolute;
+		position: fixed;
 		flex-direction: column;
 		align-items: flex-start;
 		background: rgba(0, 0, 0, 0.8);
