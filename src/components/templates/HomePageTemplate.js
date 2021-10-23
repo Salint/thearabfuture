@@ -5,8 +5,10 @@ import PageTemplate from "./PageTemplate";
 
 import NavigationBar from "../organisms/Navbar";
 
-import HeaderImage from "../../static/images/header.png"
 import Introduction from "../molecules/home/Introduction";
+import Acceptance from "../molecules/home/Acceptance";
+
+import HeaderImage from "../../static/images/header.png"
 
 const Header = styled.nav`
 	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${HeaderImage}) center no-repeat;
@@ -48,6 +50,7 @@ const HomePageTemplate = () => (
 			</Section>
 		</Header>
 		<Introduction />
+		<Acceptance />
 	</PageTemplate>
 );
 
