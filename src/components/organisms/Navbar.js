@@ -9,7 +9,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 const Nav = styled.nav`
 	display: flex;
 	padding: 10px 50px;
-	height: 60px;
+	height: 80px;
 	align-items: center;
 	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
 	${props => props.float && css`
@@ -22,7 +22,7 @@ const Nav = styled.nav`
 	`}
 
 	@media (max-width: 1000px) {
-		padding: 10px 10px;
+		padding: 0px 20px;
 	}
 `;
 
