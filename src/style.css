@@ -2,12 +2,15 @@
 
 :root {
 	--main-color: #4150ff;
+	--secondary-color:rgb(136, 144, 255);
 
 	--primary-background: white;
 	--secondary-background: rgb(247, 247, 247);
 
 	--primary-text: black;
 	--secondary-text: rgb(129, 129, 129);
+
+	--primary-border: rgb(226, 226, 226);
 }
 
 * {

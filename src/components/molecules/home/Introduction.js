@@ -75,7 +75,7 @@ const Introduction = () => (
 			<H1>احصل على مساعدة دائمة</H1>
 			<P>اطرح سؤالا في اي لغة برمجة او قم بمساعدة الآخرين في مشاكلهم!</P>
 			<ButtonSection>
-				<Button to="/auth/signup" highlighted width="160">أنشئ حسابًا</Button>
+				<Button to="/signup" highlighted width="160">أنشئ حسابًا</Button>
 				<Button to="/tos" width="160">شروط الإستخدام</Button>
 			</ButtonSection>
 		</Section>
