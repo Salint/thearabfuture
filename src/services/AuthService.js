@@ -32,7 +32,7 @@ class AuthService {
 	async LoginWithEmail(email, password) {
 		try {
 			
-			await firebase.auth().createUserWithEmailAndPassword(email, password);
+			await firebase.auth().signInWithEmailAndPassword(email, password);
 
 		}
 		catch({ code }) {
