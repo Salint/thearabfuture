@@ -40,7 +40,7 @@ const Acceptance = () => (
 	<Container>
 		<H1>الكل مُرحب به هنا</H1>
 		<P>من مبتدئين لخبراء, من خبرة عدة ايام إلى سنوات, الكل  متاح له استخدام "The Arab Future"</P>
-		<Button to="/privacy" highlighted width="200">سياسة الخصوصية</Button>
+		<Button to="/privacy" highlighted="true" width="200">سياسة الخصوصية</Button>
 	</Container>
 
 );
