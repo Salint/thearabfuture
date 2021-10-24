@@ -107,7 +107,7 @@ const NavigationBar = ({ float, theme }) => {
 					<NavLink to="/projects" theme={theme}><li>المشاريع</li></NavLink>
 					<AuthProvider>
 						<IfFirebaseUnAuthed>
-							<NavLink to="/auth/login" theme={theme}><li>تسجيل الدخول</li></NavLink>
+							<NavLink to="/login" theme={theme}><li>تسجيل الدخول</li></NavLink>
 						</IfFirebaseUnAuthed>
 					</AuthProvider>
 				</UL>
