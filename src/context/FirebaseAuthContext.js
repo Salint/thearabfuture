@@ -20,7 +20,11 @@ export class AuthProvider extends Component {
 
 	render() {
 		const { children } = this.props;
-		const { user } = this.state;
+		const { user, pending } = this.state;
+
+		if(pending) {
+			return <></>;
+		}
 
 		return (
 			<AuthContext.Provider value={{user}}>
