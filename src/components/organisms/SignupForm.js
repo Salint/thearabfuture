@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import AuthService from "../../services/AuthService";
 import Error from "../atoms/Error";
@@ -34,9 +35,22 @@ const Button = styled.button`
 	font-size: 18px;
 	position: relative;
 	top: 10px;
+	margin-bottom: 20px;
 	padding: 5px 0;
 	width: 70%;
 	cursor: pointer;
+`;
+
+const P = styled.p`
+	font-size: 16px;
+`;
+const A = styled(Link)`
+	color: #41abe8;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
 `;
 
 const SignupForm = () => {
@@ -136,6 +150,7 @@ const SignupForm = () => {
 				type="submit"
 				disabled={pending}
 			>أنشئ حساب</Button>
+			<P>ليدك حساب بالفعل؟ <A to="/login">تسجيل الدخول</A></P>
 			{ success && <Redirect to="/"/> }
 		</Form>
 	);
