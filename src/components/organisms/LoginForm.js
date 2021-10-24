@@ -61,10 +61,8 @@ const SignupForm = () => {
 	const [ pending, setPending ] = useState(false);
 	const [ success, setSuccess ] = useState(false);
 	const [ input, setInput ] = useState({
-		username: "",
 		email: "",
-		password: "",
-		passwordConfirm: "",
+		password: ""
 	});
 
 	const handleInput = (e) => {
@@ -79,23 +77,17 @@ const SignupForm = () => {
 
 		setPending(true);
 
-		if(input.username.length === 0 || 
-		input.email.length === 0 || 
-		input.password.length === 0 || 
-		input.passwordConfirm.length === 0) {
+		if(input.email.length === 0 || 
+		input.password.length === 0) {
 			
 			setError("يرجى املاء جميع الخانات");
 			setPending(false);
 				
 		}
-		else if(input.password !== input.passwordConfirm) {
-			setError("كلمات المرور غير متشابهه");
-			setPending(false);
-		}
 		else {
 			try {
 
-				await auth.createAccountWithEmail(input.email, input.username, input.password);
+				await auth.LoginWithEmail(input.email, input.password);
 
 				setSuccess(true);
 			}
@@ -108,17 +100,8 @@ const SignupForm = () => {
 
 	return (
 		<Form onSubmit={e => Submit(e)}>
-			<H1>إنشاء حساب</H1>
+			<H1>تسجيل الدخول</H1>
 			{ error && <Error width="70%">{error}</Error> }
-			<InputField 
-				displayName="أسم المستخدم" 
-				name="username"
-				type="text"
-				width="70"
-				placeholder="Salint"
-				disabled={pending}
-				onChange={e => handleInput(e)}
-			/>
 			<InputField 
 				displayName="البريد الإلكتروني" 
 				name="email"
@@ -137,20 +120,11 @@ const SignupForm = () => {
 				disabled={pending}
 				onChange={e => handleInput(e)}
 			/>
-			<InputField 
-				displayName="اعادة كلمة السر" 
-				name="passwordConfirm"
-				type="password"
-				width="70"
-				placeholder="•••••••••"
-				disabled={pending}
-				onChange={e => handleInput(e)}
-			/>
 			<Button 
 				type="submit"
 				disabled={pending}
 			>أنشئ حساب</Button>
-			<P>ليدك حساب بالفعل؟ <A to="/login">تسجيل الدخول</A></P>
+			<P>ليس ليدك حساب؟ <A to="/signup">إنشاء حساب</A></P>
 			{ success && <Redirect to="/"/> }
 		</Form>
 	);

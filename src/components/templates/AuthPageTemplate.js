@@ -1,5 +1,7 @@
 import React from "react";
+import { Redirect } from "react-router";
 import styled from "styled-components";
+import { AuthProvider, IfFirebaseAuthed, IfFirebaseUnAuthed } from "../../context/FirebaseAuthContext";
 
 import PageTemplate from "./PageTemplate";
 
@@ -11,10 +13,17 @@ const Title = styled.p`
 `;
 
 const AuthPageTemplate = ({ children }) => (
-	<PageTemplate navbar="off">
-		<Title>The Arab Future</Title>
-		{ children }
-	</PageTemplate>
+	<AuthProvider>
+		<IfFirebaseAuthed>
+			<Redirect to="/" />
+		</IfFirebaseAuthed>
+		<IfFirebaseUnAuthed>
+			<PageTemplate navbar="off">
+				<Title>The Arab Future</Title>
+				{ children }
+			</PageTemplate>
+		</IfFirebaseUnAuthed>
+	</AuthProvider>
 );
 
 export default AuthPageTemplate;
