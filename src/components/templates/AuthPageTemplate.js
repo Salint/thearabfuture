@@ -5,7 +5,9 @@ import PageTemplate from "./PageTemplate";
 
 const Title = styled.p`
 	text-align: center;
-	color: rgb(100, 100, 100);
+	color: rgb(150, 150, 150);
+	font-size: 40px;
+	margin: 60px 0;
 `;
 
 const AuthPageTemplate = ({ children }) => (
