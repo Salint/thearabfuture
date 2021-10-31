@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
 import UserContext from "../../context/UserContext";
 import UserService from "../../services/UserService";
 
