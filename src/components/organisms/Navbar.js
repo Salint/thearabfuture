@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Logo from "../../static/images/logo32.png";
+import Logo from "../../static/images/logo512.png";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { AuthProvider, IfFirebaseAuthed, IfFirebaseUnAuthed } from "../../context/FirebaseAuthContext";
 
