@@ -123,7 +123,7 @@ const SignupForm = () => {
 			<Button 
 				type="submit"
 				disabled={pending}
-			>أنشئ حساب</Button>
+			>تسجيل الدخول</Button>
 			<P>ليس ليدك حساب؟ <A to="/signup">إنشاء حساب</A></P>
 			{ success && <Redirect to="/"/> }
 		</Form>
