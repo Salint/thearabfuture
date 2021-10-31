@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import AuthService from "../../services/AuthService";
 import Error from "../atoms/Error";
-import InputField from "../molecules/InputField";
+import Field from "../molecules/InputField";
 
 const Form = styled.form`
 	
@@ -21,6 +21,10 @@ const Form = styled.form`
 	@media (max-width: 600px) {
 		width: 90%;
 	}
+`;
+
+const InputField = styled(Field)`
+	direction: ltr;
 `;
 
 const H1 = styled.h1`
@@ -107,6 +111,7 @@ const SignupForm = () => {
 				name="email"
 				type="email"
 				width="70"
+				direction="ltr"
 				placeholder="salintofficial@hotmail.com"
 				disabled={pending}
 				onChange={e => handleInput(e)}
