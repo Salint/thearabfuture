@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Logo from "../../static/images/logo32.png";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { AuthProvider, IfFirebaseUnAuthed } from "../../context/FirebaseAuthContext";
+import { AuthProvider, IfFirebaseAuthed, IfFirebaseUnAuthed } from "../../context/FirebaseAuthContext";
 
 const Nav = styled.nav`
 	display: flex;
@@ -13,6 +13,7 @@ const Nav = styled.nav`
 	height: 80px;
 	align-items: center;
 	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
+	z-index: 5;
 	${props => props.float && css`
 		background: var(--primary-background);
 		border-bottom: 1px solid rgb(220, 220, 220);
@@ -25,6 +26,11 @@ const Nav = styled.nav`
 	@media (max-width: 1000px) {
 		padding: 0px 20px;
 	}
+`;
+
+const NavHelper = styled.div`
+	width: 100%;
+	height: 80px;
 `;
 
 const Container = styled.div`
@@ -80,6 +86,7 @@ const NavLink = styled(Link)`
 	@media (max-width: 1000px) {
 		font-size: 30px;
 		margin: 10px 10px;
+		color: white;
 	}
 `;
 const Button = styled.button`
@@ -96,26 +103,32 @@ const NavigationBar = ({ float, theme }) => {
 	const [ active, setActive ] = useState(false);
 
 	return (
-		<Nav float={float} theme={theme}>
-			<Container>
-				<Link to="/"><Image src={Logo} alt="The Arab Future" /></Link>
-			</Container>
-			<Container place="flex-end">
-				<UL active={active} theme={theme}>
-					<NavLink to="/articles" theme={theme}><li>مقالات</li></NavLink>
-					<NavLink to="/questions" theme={theme}><li>اسئلة</li></NavLink>
-					<NavLink to="/projects" theme={theme}><li>المشاريع</li></NavLink>
-					<AuthProvider>
-						<IfFirebaseUnAuthed>
-							<NavLink to="/login" theme={theme}><li>تسجيل الدخول</li></NavLink>
-						</IfFirebaseUnAuthed>
-					</AuthProvider>
-				</UL>
-			</Container>
-			<BarContainer>
-				<Button onClick={e => setActive(!active)}><FontAwesomeIcon icon={faBars} /></Button>
-			</BarContainer>
-		</Nav>
+		<>
+			<Nav float={float} theme={theme}>
+				<Container>
+					<Link to="/"><Image src={Logo} alt="The Arab Future" /></Link>
+				</Container>
+				<Container place="flex-end">
+					<UL active={active} theme={theme}>
+						<NavLink to="/articles" theme={theme}><li>مقالات</li></NavLink>
+						<NavLink to="/questions" theme={theme}><li>اسئلة</li></NavLink>
+						<NavLink to="/projects" theme={theme}><li>المشاريع</li></NavLink>
+						<AuthProvider>
+							<IfFirebaseUnAuthed>
+								<NavLink to="/login" theme={theme}><li>تسجيل الدخول</li></NavLink>
+							</IfFirebaseUnAuthed>
+							<IfFirebaseAuthed>
+								<NavLink to="/profile" theme={theme}><li>ملفي الشخصي</li></NavLink>
+							</IfFirebaseAuthed>
+						</AuthProvider>
+					</UL>
+				</Container>
+				<BarContainer>
+					<Button onClick={e => setActive(!active)}><FontAwesomeIcon icon={faBars} /></Button>
+				</BarContainer>
+			</Nav>
+			{float && <NavHelper />}
+		</>
 	);
 };
 
