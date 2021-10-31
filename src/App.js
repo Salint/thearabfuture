@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
+import Profile from "./components/pages/Profile";
 
 // Cool styling ;)
 import "./style.css";
@@ -19,11 +20,8 @@ const App = () => {
 
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((user) => {
-			if(user) {
-				setUser(user);
-			}
+			setUser(user);
 			setPending(false);
-
 		});
 	});
 
@@ -39,6 +37,7 @@ const App = () => {
 						<Route exact path="/" component={HomePage} />
 						<Route exact path="/signup" component={Signup} />
 						<Route exact path="/login" component={Login} />
+						<Route exact path="/profile" component={Profile} />
 					</Switch>
 				</BrowserRouter>
 			</React.StrictMode>
