@@ -43,7 +43,13 @@ const Profile = () => {
 	}
 
 	return (
-		<ProfilePageTemplate name={userData.username} about={userData.about} followers={userData.followers} posts={userData.posts} />
+		<ProfilePageTemplate 
+			name={userData.username} 
+			about={userData.about} 
+			followers={userData.followers} 
+			posts={userData.posts} 
+			moderator={userData.moderator}
+		/>
 	)
 
 };
