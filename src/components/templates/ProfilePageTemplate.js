@@ -7,7 +7,7 @@ import PageTemplate from "./PageTemplate";
 import Container from "../atoms/Container";
 
 import BannerSource from "../../static/images/banner-default.png";
-import UserProfileSource from "../../static/images/user-default.png";
+import DefaultUserProfileSource from "../../static/images/user-default.png";
 
 const BaseContainer = styled(Container)`
 	margin: 50px auto;
@@ -91,13 +91,13 @@ const Stat = styled.p`
 const StatNumber = styled.span`
 	color: black;
 `;
-const ProfilePageTemplate = ({ name, about, moderator, followers, posts }) => (
+const ProfilePageTemplate = ({ name, about, profileURL, bannerURL,  moderator, followers, posts }) => (
 	<PageTemplate>
 		<BaseContainer>
 			<Header>
-				<Banner src={BannerSource} />
+				<Banner src={bannerURL ? bannerURL : BannerSource} />
 				<UserData>
-					<UserProfile src={UserProfileSource} />
+					<UserProfile src={profileURL ? profileURL : DefaultUserProfileSource} />
 					<UserName>{name}</UserName>
 					{ moderator && <Moderator><FontAwesomeIcon icon={faUserShield} /> مشرف</Moderator> }
 					{ about && <About>{about}</About> }
