@@ -91,11 +91,11 @@ const Stat = styled.p`
 const StatNumber = styled.span`
 	color: black;
 `;
-const ProfilePageTemplate = ({ name, about, profileURL, moderator, followers, posts }) => (
+const ProfilePageTemplate = ({ name, about, profileURL, bannerURL,  moderator, followers, posts }) => (
 	<PageTemplate>
 		<BaseContainer>
 			<Header>
-				<Banner src={BannerSource} />
+				<Banner src={bannerURL ? bannerURL : BannerSource} />
 				<UserData>
 					<UserProfile src={profileURL ? profileURL : DefaultUserProfileSource} />
 					<UserName>{name}</UserName>
