@@ -47,6 +47,7 @@ const Profile = () => {
 			name={userData.username} 
 			about={userData.about} 
 			followers={userData.followers} 
+			profileURL={userData.profileURL}
 			posts={userData.posts} 
 			moderator={userData.moderator}
 		/>

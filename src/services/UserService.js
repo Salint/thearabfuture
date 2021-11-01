@@ -9,11 +9,13 @@ class UserService {
 			const result = await firebase.firestore().collection("users").doc(uid).get();
 
 			const isModerator = await this.isUserModerator(uid);
+			const profileURL = await this.getUserProfileURL(uid);
 
 			return {
 				username: result.get("username"),
 				about: result.get("about"),
 				moderator: isModerator,
+				profileURL: profileURL,
 				followers: 0,
 				posts: 0
 			}
@@ -39,6 +41,21 @@ class UserService {
 		}
 		catch(error) {
 			throw error;
+		}
+
+	}
+
+	async getUserProfileURL(uid) {
+
+		try {
+			
+			const result = await firebase.storage().ref("/users/" + uid).child("profile.jpg").getDownloadURL();
+			
+			return result;
+
+		}
+		catch(error) {
+			return undefined;
 		}
 
 	}
