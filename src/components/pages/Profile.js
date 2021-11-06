@@ -32,14 +32,16 @@ const Profile = () => {
 			}
 
 		})();
-	});
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	if(!user) {
 		return <Redirect to="/login" />;
 	}
 
 	if(pending) {
-		return <></>;
+		return <ProfilePageTemplate pending={true} />;
 	}
 
 	return (

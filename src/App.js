@@ -23,7 +23,7 @@ const App = () => {
 			setUser(user);
 			setPending(false);
 		});
-	});
+	}, []);
 
 	if(pending) {
 		return <></>;
