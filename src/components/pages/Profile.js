@@ -6,14 +6,13 @@ import UserService from "../../services/UserService";
 import ProfilePageTemplate from "../templates/ProfilePageTemplate";
 
 
-const Profile = () => {
+const Profile = ({ match }) => {
 	
 	const user = useContext(UserContext);
 	const userService = new UserService();
 
 	const [ userData, setUserData ] = useState();
 	const [ pending, setPending ] = useState(true);
-	
 
 	useEffect(() => {
 
@@ -21,7 +20,7 @@ const Profile = () => {
 
 			if(pending && user) {
 				try {
-					const tempUserData = await userService.fetchUser(user.uid);
+					const tempUserData = await userService.fetchUser(match.params.id ? match.params.id : user.uid);
 					
 					setUserData(tempUserData);
 					setPending(false);
