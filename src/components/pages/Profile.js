@@ -13,6 +13,7 @@ const Profile = ({ match }) => {
 
 	const [ userData, setUserData ] = useState();
 	const [ pending, setPending ] = useState(true);
+	const [ error, setError ] = useState("");
 
 	useEffect(() => {
 
@@ -26,7 +27,8 @@ const Profile = ({ match }) => {
 					setPending(false);
 				}
 				catch(error) {
-					throw error;
+					setError(error.code);
+					setPending(false);
 				}
 			}
 
@@ -41,6 +43,10 @@ const Profile = ({ match }) => {
 
 	if(pending) {
 		return <ProfilePageTemplate pending={true} />;
+	}
+	
+	if(error.length > 0) {
+		return <ProfilePageTemplate error={error} />;
 	}
 
 	return (

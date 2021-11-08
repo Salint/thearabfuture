@@ -8,23 +8,41 @@ class UserService {
 			
 			const result = await firebase.firestore().collection("users").doc(uid).get();
 
-			const isModerator = await this.isUserModerator(uid);
-			const profileURL = await this.getUserProfileURL(uid);
-			const bannerURL = await this.getUserBannerURL(uid);
+			if(result.exists) {
+				const isModerator = await this.isUserModerator(uid);
+				const profileURL = await this.getUserProfileURL(uid);
+				const bannerURL = await this.getUserBannerURL(uid);
 
-			return {
-				username: result.get("username"),
-				about: result.get("about"),
-				moderator: isModerator,
-				profileURL: profileURL,
-				bannerURL: bannerURL,
-				followers: 0,
-				posts: 0
+				return {
+					username: result.get("username"),
+					about: result.get("about"),
+					moderator: isModerator,
+					profileURL: profileURL,
+					bannerURL: bannerURL,
+					followers: 0,
+					posts: 0
+				}
+			}
+			else {
+				const error = new Error();
+				error.code = "user/user-not-found";
+
+				throw error;
+				
 			}
 
 		}
 		catch(error) {
-			throw error;
+			
+			if(error.code === "user/user-not-found") {
+				throw error;
+			}
+			else {
+				const errorCustom = new Error();
+				errorCustom.code = "user/unknown-error";
+
+				throw errorCustom;
+			}
 		}
 
 	}

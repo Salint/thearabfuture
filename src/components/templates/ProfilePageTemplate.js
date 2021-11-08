@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 import PageTemplate from "./PageTemplate";
 import ProfileElement from "../organisms/ProfileElement";
+import NotFound from "../molecules/NotFound";
 
 import LoadingPicture from "../../static/images/loading.png";
 
@@ -28,9 +29,12 @@ const Image = styled.img`
 	opacity: 0.5;
 `;
 
-const ProfilePageTemplate = ({ pending, name, about, profileURL, bannerURL,  moderator, followers, posts }) => (
+
+const ProfilePageTemplate = ({ error, pending, name, about, profileURL, bannerURL,  moderator, followers, posts }) => (
 	<PageTemplate>
-		{ pending ? <Loading><Image src={LoadingPicture} /></Loading> : <ProfileElement 
+		{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
+		{ (!pending && error === "user/user-not-found") && <NotFound /> }
+		{ (!pending && !error) && <ProfileElement 
 			name={name} 
 			about={about} 
 			followers={followers} 
