@@ -8,6 +8,7 @@ import HomePage from "./components/pages/HomePage";
 import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
 import Profile from "./components/pages/Profile";
+import NotFound from "./components/pages/NotFound";
 
 // Cool styling ;)
 import "./style.css";
@@ -39,6 +40,7 @@ const App = () => {
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/profile" component={Profile} />
 						<Route exact path="/profile/:id" component={Profile} />
+						<Route component={NotFound} />
 					</Switch>
 				</BrowserRouter>
 			</React.StrictMode>
