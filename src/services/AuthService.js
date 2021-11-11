@@ -53,6 +53,14 @@ class AuthService {
 			}
 		}
 	}
+	async logOut() {
+		try {
+			await firebase.auth().signOut();
+		}
+		catch(error) {
+			throw error;
+		}
+	}
 
 }
 
