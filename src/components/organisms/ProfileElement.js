@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH, faUserShield } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,6 @@ import Container from "../atoms/Container";
 import BannerSource from "../../static/images/banner-default.png";
 import DefaultUserProfileSource from "../../static/images/user-default.png";
 import { Link } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
 
 const BaseContainer = styled(Container)`
 	margin: 50px auto;
