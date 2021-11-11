@@ -30,7 +30,7 @@ const Image = styled.img`
 `;
 
 
-const ProfilePageTemplate = ({ error, pending, name, about, profileURL, bannerURL,  moderator, followers, posts }) => (
+const ProfilePageTemplate = ({ error, pending, name, about, profileURL, bannerURL,  moderator, followers, posts, personal, onLogout }) => (
 	<PageTemplate>
 		{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
 		{ (!pending && error === "user/user-not-found") && <NotFound /> }
@@ -42,6 +42,8 @@ const ProfilePageTemplate = ({ error, pending, name, about, profileURL, bannerUR
 			bannerURL={bannerURL}
 			posts={posts} 
 			moderator={moderator}
+			personal={personal}
+			onLogout={onLogout}
 		/>}
 	</PageTemplate>
 )
