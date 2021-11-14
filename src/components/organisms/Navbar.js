@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Logo from "../../static/images/logo512.png";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { AuthProvider, IfFirebaseAuthed, IfFirebaseUnAuthed } from "../../context/FirebaseAuthContext";
+import UserContext from "../../context/UserContext";
 
 const Nav = styled.nav`
 	display: flex;
@@ -100,6 +100,8 @@ const Button = styled.button`
 
 const NavigationBar = ({ float, theme }) => {
 	
+	const user = useContext(UserContext); 
+
 	const [ active, setActive ] = useState(false);
 
 	return (
@@ -113,14 +115,12 @@ const NavigationBar = ({ float, theme }) => {
 						<NavLink to="/articles" theme={theme}><li>مقالات</li></NavLink>
 						<NavLink to="/questions" theme={theme}><li>اسئلة</li></NavLink>
 						<NavLink to="/projects" theme={theme}><li>المشاريع</li></NavLink>
-						<AuthProvider>
-							<IfFirebaseUnAuthed>
-								<NavLink to="/login" theme={theme}><li>تسجيل الدخول</li></NavLink>
-							</IfFirebaseUnAuthed>
-							<IfFirebaseAuthed>
-								<NavLink to="/profile" theme={theme}><li>ملفي الشخصي</li></NavLink>
-							</IfFirebaseAuthed>
-						</AuthProvider>
+						{!user ?
+						
+							<NavLink to="/login" theme={theme}><li>تسجيل الدخول</li></NavLink> :
+							<NavLink to={"/profile/" + user.uid} theme={theme}><li>ملفي الشخصي</li></NavLink>
+
+						}
 					</UL>
 				</Container>
 				<BarContainer>
