@@ -57,10 +57,6 @@ const Profile = ({ match }) => {
 			setError(error);
 		}
 	}
-
-	if(!match.params.id) {
-		return <Redirect to={"/profile/" + user.uid} />;
-	}
 	
 	if(redirect) {
 		return <Redirect to="/" />;
@@ -72,6 +68,9 @@ const Profile = ({ match }) => {
 	
 	if(!user && !pending) {
 		return <Redirect to="/login" />;
+	}
+	if(!match.params.id) {
+		return <Redirect to={"/profile/" + user.uid} />;
 	}
 	
 	
