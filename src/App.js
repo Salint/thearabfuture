@@ -38,8 +38,7 @@ const App = () => {
 						<Route exact path="/" component={HomePage} />
 						<Route exact path="/signup" component={Signup} />
 						<Route exact path="/login" component={Login} />
-						<Route exact path="/profile" component={Profile} />
-						<Route exact path="/profile/:id" component={Profile} />
+						<Route path="/profile/:id" component={Profile} />
 						<Route component={NotFound} />
 					</Switch>
 				</BrowserRouter>
