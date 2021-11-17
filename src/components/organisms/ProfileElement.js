@@ -151,9 +151,10 @@ const StatNumber = styled.span`
 `;
 
 
-const ProfileElement = ({ name, about, profileURL, bannerURL,  moderator, followers, posts, personal, onLogout }) => {
+const ProfileElement = ({ user, personal, onLogout }) => {
 
 	const [ options, toggleOptions ] = useState(false);
+	const { username, about, profileURL, bannerURL,  moderator, followers, posts } = user;
 	
 	return (
 		<BaseContainer>
@@ -172,7 +173,7 @@ const ProfileElement = ({ name, about, profileURL, bannerURL,  moderator, follow
 							}
 						</OptionsSection>
 					}
-					<UserName>{name}</UserName>
+					<UserName>{username}</UserName>
 					{ moderator && <Moderator><FontAwesomeIcon icon={faUserShield} /> مشرف</Moderator> }
 					{ about && <About>{about}</About> }
 					<Stats>

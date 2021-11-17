@@ -81,13 +81,7 @@ const Profile = ({ match }) => {
 	return (
 		<>
 			<ProfilePageTemplate 
-				name={userData.username} 
-				about={userData.about} 
-				followers={userData.followers} 
-				profileURL={userData.profileURL}
-				bannerURL={userData.bannerURL}
-				posts={userData.posts} 
-				moderator={userData.moderator}
+				user={userData}
 				personal={personal}
 				onLogout={onLogout}
 			/>

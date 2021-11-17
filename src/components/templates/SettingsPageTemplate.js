@@ -2,10 +2,9 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 import PageTemplate from "./PageTemplate";
-import ProfileElement from "../organisms/ProfileElement";
-import NotFound from "../molecules/NotFound";
 
 import LoadingPicture from "../../static/images/loading.png";
+import SettingsForm from "../organisms/SettingsForm";
 
 const Rotate = keyframes`
 	from {
@@ -30,16 +29,11 @@ const Image = styled.img`
 `;
 
 
-const ProfilePageTemplate = ({ error, pending, user, personal, onLogout }) => (
+const SettingPageTemplate = ({ pending, user }) => (
 	<PageTemplate>
 		{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
-		{ (!pending && error === "user/user-not-found") && <NotFound /> }
-		{ (!pending && !error) && <ProfileElement 
-			user={user}
-			personal={personal}
-			onLogout={onLogout}
-		/>}
+		{ !pending && <SettingsForm user={user} />}
 	</PageTemplate>
 )
 
-export default ProfilePageTemplate;
+export default SettingPageTemplate;

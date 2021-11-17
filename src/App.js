@@ -9,6 +9,7 @@ import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
 import Profile from "./components/pages/Profile";
 import NotFound from "./components/pages/NotFound";
+import Settings from "./components/pages/Settings";
 
 // Cool styling ;)
 import "./style.css";
@@ -39,6 +40,7 @@ const App = () => {
 						<Route exact path="/signup" component={Signup} />
 						<Route exact path="/login" component={Login} />
 						<Route path="/profile/:id" component={Profile} />
+						<Route exact path="/settings/" component={Settings} />
 						<Route component={NotFound} />
 					</Switch>
 				</BrowserRouter>
