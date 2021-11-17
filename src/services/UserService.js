@@ -14,6 +14,7 @@ class UserService {
 				const bannerURL = await this.getUserBannerURL(uid);
 
 				return {
+					uid: uid,
 					username: result.get("username"),
 					about: result.get("about"),
 					moderator: isModerator,
@@ -91,6 +92,21 @@ class UserService {
 		}
 		catch(error) {
 			return undefined;
+		}
+
+	}
+	async updateUser(uid, username, about) {
+
+		try {
+			
+			await firebase.firestore().collection("users").doc(uid).update({
+				username: username,
+				about: about
+			});
+
+		}
+		catch(error) {
+			throw error;
 		}
 
 	}
