@@ -114,7 +114,7 @@ const Button = styled.button`
 	top: 10px;
 	margin-bottom: 20px;
 	padding: 5px 0;
-	width: 30%;
+	width: 50%;
 	cursor: pointer;
 `;
 
@@ -182,7 +182,7 @@ const SettingsForm = ({ user }) => {
 				displayName="الأسم" 
 				name="username"
 				type="text"
-				width="30"
+				width="50"
 				direction="ltr"
 				defaultValue={username}
 				disabled={pending}
