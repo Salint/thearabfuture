@@ -104,7 +104,7 @@ const SettingsCoverPicture = () => {
 		cropper.getCroppedCanvas().toBlob(async (blob) => {
 			try {
 				
-				userService.updateBanner(user.uid, blob);
+				await userService.updateBanner(user.uid, blob);
 
 				setSuccess(true);
 			}
