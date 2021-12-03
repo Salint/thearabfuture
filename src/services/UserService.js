@@ -114,9 +114,7 @@ class UserService {
 		
 		try {
 			
-			const ref = firebase.storage().ref("users").child(uid).child("profile.jpg");
-
-			await ref.put(profileData, { contentType: "image/jpeg" });
+			await firebase.storage().ref("users").child(uid).child("profile.jpg").put(profileData, { contentType: "image/jpeg" });
 		}
 		catch(error) {
 			throw error;
@@ -128,9 +126,7 @@ class UserService {
 
 		try {
 			
-			const ref = firebase.storage().ref("users").child(uid).child("banner.jpg");
-
-			await ref.put(bannerData, { contentType: "image/jpeg" });
+			await firebase.storage().ref("users").child(uid).child("banner.jpg").put(bannerData, { contentType: "image/jpeg" });
 		}
 		catch(error) {
 			throw error;

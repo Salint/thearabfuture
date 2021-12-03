@@ -104,7 +104,7 @@ const SettingsProfilePicture = () => {
 		cropper.getCroppedCanvas().toBlob(async (blob) => {
 			try {
 				
-				userService.updateProfilePicture(user.uid, blob);
+				await userService.updateProfilePicture(user.uid, blob);
 
 				setSuccess(true);
 			}
