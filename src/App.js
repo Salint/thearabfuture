@@ -9,9 +9,12 @@ import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
 import Profile from "./components/pages/Profile";
 import NotFound from "./components/pages/NotFound";
+
 import Settings from "./components/pages/Settings";
 import SettingsProfilePicture from "./components/pages/settings/ProfilePicture";
 import SettingsCoverPicture from "./components/pages/settings/CoverPicture";
+
+import Projects from "./components/pages/Projects";
 
 // Cool styling ;)
 import "./style.css";
@@ -46,6 +49,8 @@ const App = () => {
 						<Route exact path="/settings" component={Settings} />
 						<Route exact path="/settings/profile" component={SettingsProfilePicture} />
 						<Route exact path="/settings/cover" component={SettingsCoverPicture} />
+
+						<Route exact path="/projects" component={Projects} />
 						
 						<Route component={NotFound} />
 					</Switch>
