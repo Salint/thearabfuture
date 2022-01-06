@@ -76,7 +76,7 @@ const Introduction = () => (
 			<P>اطرح سؤالا في اي لغة برمجة او قم بمساعدة الآخرين في مشاكلهم!</P>
 			<ButtonSection>
 				<Button to="/signup" highlighted="true" width="160">أنشئ حسابًا</Button>
-				<Button to="/tos" width="160">شروط الإستخدام</Button>
+				<Button to="/terms" width="160">شروط الخدمة</Button>
 			</ButtonSection>
 		</Section>
 	</Container>
