@@ -154,6 +154,8 @@ const SignupForm = () => {
 				type="submit"
 				disabled={pending}
 			>أنشئ حساب</Button>
+			<P>بإنشائك حساب, فأنت توافق على <A to="/terms">شروط الخدمة</A>.</P>
+			<br />
 			<P>ليدك حساب بالفعل؟ <A to="/login">تسجيل الدخول</A></P>
 			{ success && <Redirect to="/"/> }
 		</Form>
