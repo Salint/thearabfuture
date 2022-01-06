@@ -10,6 +10,8 @@ import Login from "./components/pages/Login";
 import Profile from "./components/pages/Profile";
 import NotFound from "./components/pages/NotFound";
 
+import TermsOfService from "./components/pages/legal/TermsOfService";
+
 import Settings from "./components/pages/Settings";
 import SettingsProfilePicture from "./components/pages/settings/ProfilePicture";
 import SettingsCoverPicture from "./components/pages/settings/CoverPicture";
@@ -45,6 +47,8 @@ const App = () => {
 						<Route exact path="/signup" component={Signup} />
 						<Route exact path="/login" component={Login} />
 						<Route path="/profile/:id" component={Profile} />
+
+						<Route path="/terms" component={TermsOfService} />
 
 						<Route exact path="/settings" component={Settings} />
 						<Route exact path="/settings/profile" component={SettingsProfilePicture} />
