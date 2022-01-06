@@ -1,0 +1,23 @@
+.markdown-view {
+	font-size: 16px;
+	direction: rtl;
+}
+.markdown-view h1 { font-size: 24px; }
+.markdown-view h2 { font-size: 22px; }
+.markdown-view h3 { font-size: 20px; }
+.markdown-view h4 { font-size: 18px; }
+.markdown-view h5 { font-size: 16px; }
+.markdown-view h6 { font-size: 14px; }
+
+.markdown-view code { 
+	background: rgba(0, 0, 0, 0.07);
+	padding: 2px 5px;
+	border-radius: 5px;
+	font-size: 13px;
+	direction: rtl;
+	display: inline-block;
+	font-family: 'Courier New', Courier, monospace;
+}
+.markdown-view code::after {
+	content: "";
+}
