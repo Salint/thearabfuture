@@ -77,13 +77,7 @@ const QuestionPageTemplate = ({ error, pending, question }) => {
 						<UserContainerImage src={question.userData.profileURL ? question.userData.profileURL : DefaultUserProfileSource } alt={question.userData.username} />
 						<UserContainerName>{question.userData.username}</UserContainerName>
 					</UserContainer>
-					<MarkdownView markdown={
-						"هاي هاي هاي\n```var test = 5;```"
-					} 
-					style={{
-						direction: "rtl"
-					}}
-					className="markdown-view"/>
+					<MarkdownView markdown={question.content} className="markdown-view"/>
 				</QuestionSection>
 			}
 		</PageTemplate>
