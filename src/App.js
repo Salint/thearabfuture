@@ -48,7 +48,7 @@ const App = () => {
 						<Route exact path="/login" component={Login} />
 						<Route path="/profile/:id" component={Profile} />
 
-						<Route path="/terms" component={TermsOfService} />
+						<Route exact path="/terms" component={TermsOfService} />
 
 						<Route exact path="/settings" component={Settings} />
 						<Route exact path="/settings/profile" component={SettingsProfilePicture} />
