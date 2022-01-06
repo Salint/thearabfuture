@@ -35,28 +35,11 @@ const Warning = styled.p`
 	margin: 80px 0;
 `;
 
-const Button = styled(Link)`
-	display: block;
-	width: 200px;
-	border-radius: 5px;
-	background: var(--main-color);
-`;
-
 const QuestionsPageTemplate = ({ error, pending, questions }) => (
 	<PageTemplate>
-		
 		{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
-		<Question question={{
-			id: "522",
-			title: "يوجد مشكلة",
-			category: "الذكاء الاصطناعي",
-			date: new Date(),
-			userData: {
-				uid: "",
-				username: "Salint",
-				profileURL: "https://firebasestorage.googleapis.com/v0/b/thearabfuture.appspot.com/o/users%2F1EDrthRVwTM8Cg1RA5Qn3kJDW4P2%2Fprofile.jpg?alt=media&token=132fab37-b078-4e0e-8a32-567a75c8b8db"
-			}
-		}} />
+		{ questions.length === 0 && !pending && <Warning>لا توجد اسئلة حتى الآن.</Warning> }
+		{ questions && questions.map(question => <Question key={question.id} question={question} />) }
 	</PageTemplate>
 )
 
