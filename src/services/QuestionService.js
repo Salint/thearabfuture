@@ -56,10 +56,24 @@ class QuestionService {
 				userData: author
 			};
 
-			console.log("test");
-
 			return question;
 		}	
+		catch(error) {
+			throw error;
+		}
+	}
+
+	async addQuestion(uid, title, category, content) {
+
+		try {
+			await firebase.firestore().collection("questions").add({
+				author: uid,
+				title: title,
+				category: category,
+				content: content,
+				date: firebase.firestore.FieldValue.serverTimestamp()
+			});
+		}
 		catch(error) {
 			throw error;
 		}
