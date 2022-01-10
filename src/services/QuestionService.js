@@ -31,7 +31,7 @@ class QuestionService {
 			return questions;
 		}	
 		catch(error) {
-			throw error;
+			throw new Error("حدث خطأ");
 		}
 	}
 
@@ -40,26 +40,30 @@ class QuestionService {
 		const userService = new UserService();
 
 		try {
-
-			let question = {};
 			
-			const questionData = await firebase.firestore().collection("questions").doc(id).get();
+			const question = await firebase.firestore().collection("questions").doc(id).get();
 
-			const author = await userService.fetchUser(questionData.get("author"));
+			if(question.exists) {
+				const author = await userService.fetchUser(question.get("author"));
 
-			question = {
-				id: questionData.id,
-				title: questionData.get("title"),
-				content: questionData.get("content"),
-				category: questionData.get("category"),
-				date: questionData.get("date").toDate(),
-				userData: author
-			};
+				return {
+					id: question.id,
+					title: question.get("title"),
+					content: question.get("content"),
+					category: question.get("category"),
+					date: question.get("date").toDate(),
+					userData: author
+				};
+			}
+			else {
+				const error = new Error();
+				error.code = "question/question-not-found";
 
-			return question;
+				throw error;
+			}
 		}	
 		catch(error) {
-			throw error;
+			throw new Error("حدث خطأ");
 		}
 	}
 
@@ -75,7 +79,7 @@ class QuestionService {
 			});
 		}
 		catch(error) {
-			throw error;
+			throw new Error("حدث خطأ أثناء نشر السؤال");
 		}
 	}
 
