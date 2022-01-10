@@ -109,7 +109,6 @@ const NewQuestionForm = () => {
 				setSuccess(true);
 			}
 			catch(error) {
-				console.error(error);
 				setError(error.message);
 			}
 		}
@@ -120,6 +119,7 @@ const NewQuestionForm = () => {
 		<Form onSubmit={e => Submit(e)}>
 			{ success && <Redirect to="/questions" /> }
 			<Title>إطرح سؤالاً</Title>
+			{ error && <Error>{error}</Error> }
 			<InputField 
 				displayName="العنوان" 
 				name="title"
