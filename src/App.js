@@ -17,6 +17,7 @@ import SettingsCoverPicture from "./components/pages/settings/CoverPicture";
 import Projects from "./components/pages/Projects";
 
 import Questions from "./components/pages/Questions";
+import NewQuestion from "./components/pages/questions/NewQuestion";
 import Question from "./components/pages/questions/Question";
 
 // Cool styling ;)
@@ -25,7 +26,6 @@ import "./markdown.css";
 
 
 import UserContext from "./context/UserContext";
-import NewQuestionPageTemplate from "./components/templates/questions/NewQuestionTemplate";
 
 const App = () => {
 
@@ -60,7 +60,7 @@ const App = () => {
 						<Route exact path="/projects" component={Projects} />
 
 						<Route exact path="/questions" component={Questions} />
-						<Route exact path="/questions/new" component={NewQuestionPageTemplate} />
+						<Route exact path="/questions/new" component={NewQuestion} />
 						<Route path="/questions/:id" component={Question} />
 						
 						<Route component={NotFound} />
