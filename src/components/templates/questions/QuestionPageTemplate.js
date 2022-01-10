@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import MarkdownView from "react-showdown";
 import styled, { keyframes } from "styled-components";
 
-import PageTemplate from "./PageTemplate";
-import NotFound from "../molecules/NotFound";
+import PageTemplate from "../PageTemplate";
+import NotFound from "../../molecules/NotFound";
 
-import DefaultUserProfileSource from "../../static/images/user-default.png";
+import DefaultUserProfileSource from "../../../static/images/user-default.png";
 
-import LoadingPicture from "../../static/images/loading.png";
+import LoadingPicture from "../../../static/images/loading.png";
 
 const Rotate = keyframes`
 	from {

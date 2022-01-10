@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import QuestionService from "../../services/QuestionService";
+import QuestionService from "../../../services/QuestionService";
 
-import QuestionPageTemplate from "../templates/QuestionPageTemplate";
+import QuestionPageTemplate from "../../templates/questions/QuestionPageTemplate";
 
 
 const Question = ({ match }) => {
