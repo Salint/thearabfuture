@@ -63,7 +63,9 @@ class QuestionService {
 			}
 		}	
 		catch(error) {
-			throw new Error("حدث خطأ");
+			// TODO Handle error message on display, not here.
+			if(error.code !== "question/question-not-found") throw new Error("حدث خطأ");
+			else throw error;
 		}
 	}
 
