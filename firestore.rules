@@ -15,6 +15,7 @@ service cloud.firestore {
     }
     match /questions/{questionId} {
       allow read: if true
+      allow create: if request.auth != null 
     }
   }
 }
