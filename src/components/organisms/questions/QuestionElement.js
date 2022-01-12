@@ -38,20 +38,44 @@ const UserContainerName = styled.p`
 	margin-right: 5px;
 `;
 
+const Answer = styled.section`
+	border-top: 1px solid var(--primary-border);
+	padding-top: 30px;
+`;
+
+
+const Date = styled.h6`
+	font-size: 13px;
+	color: var(--secondary-text);
+	margin-top: -3px;
+`;
 
 
 const QuestionElement = ({ question }) => {
 
-	const { title, userData: user, content } = question;
+	const { title, userData: user, content, date, answers } = question;
 	
 	return (
 		<QuestionSection>
 			<Title>{title}</Title>
+			<Date>{date.toLocaleDateString()}</Date>
 			<UserContainer to={"/profile/" + user.uid}>
 				<UserContainerImage src={user.profileURL ? user.profileURL : DefaultUserProfileSource } alt={user.username} />
 				<UserContainerName>{user.username}</UserContainerName>
 			</UserContainer>
 			<MarkdownView markdown={content} className="markdown-view"/>
+			{ answers.map(({ id, content, date, userData: user }) => 
+				<Answer id={id}>
+					<UserContainer to={"/profile/" + user.uid}>
+						<UserContainerImage src={user.profileURL ? user.profileURL : DefaultUserProfileSource } alt={user.username} />
+						<UserContainerName>{user.username}</UserContainerName>
+					</UserContainer>
+					<Date>{date.toLocaleDateString()}</Date>
+					<br />
+					<MarkdownView markdown={content} className="markdown-view"/>	
+				</Answer>	
+			)}
+			 
 		</QuestionSection>
 	);
 };

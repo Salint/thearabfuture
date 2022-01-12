@@ -44,6 +44,23 @@ class QuestionService {
 			const question = await firebase.firestore().collection("questions").doc(id).get();
 
 			if(question.exists) {
+
+				let answers = [];
+
+				const answerResult = await firebase.firestore().collection("questions").doc(id).collection("answers").orderBy("date", "desc").get();
+				
+				for (const answer of answerResult.docs) {
+					
+					const author = await userService.fetchUser(answer.get("author"));
+
+					answers.push({
+						id: answer.id,
+						content: answer.get("content"),
+						date: answer.get("date").toDate(),
+						userData: author
+					});
+					
+				}
 				const author = await userService.fetchUser(question.get("author"));
 
 				return {
@@ -52,6 +69,7 @@ class QuestionService {
 					content: question.get("content"),
 					category: question.get("category"),
 					date: question.get("date").toDate(),
+					answers: answers,
 					userData: author
 				};
 			}
@@ -79,6 +97,19 @@ class QuestionService {
 				content: content,
 				date: firebase.firestore.FieldValue.serverTimestamp()
 			});
+		}
+		catch(error) {
+			throw new Error("حدث خطأ أثناء نشر السؤال");
+		}
+	}
+
+	async addAnswer(id, uid, content) {
+		try {
+			await firebase.firestore().collection("questions").doc(id).collection("answers").add({
+				author: uid,
+				content: content,
+				date: firebase.firestore.FieldValue.serverTimestamp()
+			})
 		}
 		catch(error) {
 			throw new Error("حدث خطأ أثناء نشر السؤال");

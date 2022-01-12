@@ -6,6 +6,7 @@ import NotFound from "../../molecules/NotFound";
 
 import LoadingPicture from "../../../static/images/loading.png";
 import QuestionElement from "../../organisms/questions/QuestionElement";
+import AnswerForm from "../../organisms/questions/AnswerForm";
 
 const Rotate = keyframes`
 	from {
@@ -35,7 +36,12 @@ const QuestionPageTemplate = ({ error, pending, question }) => (
 	<PageTemplate>
 		{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
 		{ (!pending && error === "question/question-not-found") && <NotFound /> }
-		{ (!pending && !error) && <QuestionElement question={question}/> }
+		{ (!pending && !error) && 
+			<>
+				<QuestionElement question={question} /> 
+				<AnswerForm id={question.id} />
+			</>
+		}
 	</PageTemplate>
 );
 
