@@ -1,0 +1,6 @@
+{
+	"editor.unicodeHighlight.nonBasicASCII": false,
+	"editor.unicodeHighlight.includeComments": false,
+	"editor.unicodeHighlight.invisibleCharacters": false,
+	"editor.unicodeHighlight.ambiguousCharacters": false
+}

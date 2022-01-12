@@ -155,7 +155,7 @@ const ProfileElement = ({ user, personal, onLogout }) => {
 
 	const [ options, toggleOptions ] = useState(false);
 	const { username, about, profileURL, bannerURL,  moderator, followers, posts } = user;
-	
+
 	return (
 		<BaseContainer>
 			<Header>
