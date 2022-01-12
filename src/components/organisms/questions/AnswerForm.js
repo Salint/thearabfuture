@@ -123,7 +123,7 @@ const AnswerForm = ({ id }) => {
 			<Label>عرض مسبق:</Label>
 			<hr></hr>
 			<br />
-			<MarkdownView markdown={input.content} className="markdown-view"/>
+			<MarkdownView markdown={input} className="markdown-view"/>
 			<Button
 				disabled={pending}
 				type="submit"
