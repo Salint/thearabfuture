@@ -4,8 +4,10 @@ import MarkdownView from "react-showdown";
 import styled from "styled-components";
 import QuestionService from "../../../services/QuestionService";
 import Error from "../../atoms/Error";
+import { AuthProvider, IfFirebaseAuthed, IfFirebaseUnAuthed } from "../../../context/FirebaseAuthContext";
 
 import UserContext from "../../../context/UserContext";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const Title = styled.h1`
 	font-size: 30px;
@@ -64,6 +66,21 @@ const Button = styled.button`
 	border: none;
 `;
 
+const Notice = styled.p`
+	font-size: 18px;
+	text-align: center;
+	margin-bottom: 20px;
+`;
+
+const NoticeLink = styled(Link)`
+	color: #41abe8;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
 const AnswerForm = ({ id }) => {
 
 	const questionService = new QuestionService();
@@ -106,29 +123,36 @@ const AnswerForm = ({ id }) => {
 	};
 
 	return (
-		<Form onSubmit={e => Submit(e)}>
-			{ success && <Redirect to="/questions" /> }
-			<Title>الديك إجابه؟</Title>
-			{ error && <Error>{error}</Error> }
-			
-			<Label>الاجابة:</Label>
-			<Editor>
-				<Field
-					name="content"
-					rows="10"
-					disabled={pending}
-					onChange={e => handleInput(e)}
-				></Field>
-			</Editor>
-			<Label>عرض مسبق:</Label>
-			<hr></hr>
-			<br />
-			<MarkdownView markdown={input} className="markdown-view"/>
-			<Button
-				disabled={pending}
-				type="submit"
-			>نشر الأجابة</Button>
-		</Form>
+		<AuthProvider>
+			<IfFirebaseAuthed>
+				<Form onSubmit={e => Submit(e)}>
+					{ success && <Redirect to="/questions" /> }
+					<Title>الديك إجابه؟</Title>
+					{ error && <Error>{error}</Error> }
+					
+					<Label>الاجابة:</Label>
+					<Editor>
+						<Field
+							name="content"
+							rows="10"
+							disabled={pending}
+							onChange={e => handleInput(e)}
+						></Field>
+					</Editor>
+					<Label>عرض مسبق:</Label>
+					<hr></hr>
+					<br />
+					<MarkdownView markdown={input} className="markdown-view"/>
+					<Button
+						disabled={pending}
+						type="submit"
+					>نشر الأجابة</Button>
+				</Form>
+			</IfFirebaseAuthed>
+			<IfFirebaseUnAuthed>
+				<Notice>الديك إجابة؟ <NoticeLink to="/login">تسجيل الدخول</NoticeLink>.</Notice>
+			</IfFirebaseUnAuthed>
+		</AuthProvider>
 	);
 };
 
