@@ -9,50 +9,50 @@ class ArticleService {
 
 		try {
 
-			let questions = [];
+			let articles = [];
 			
-			const questionData = await firebase.firestore().collection("articles").orderBy("date", "desc").get();
+			const articleData = await firebase.firestore().collection("articles").orderBy("date", "desc").get();
 
-			for (const question of questionData.docs) {
+			for (const article of articleData.docs) {
 
-				const author = await userService.fetchUser(question.get("author"));
+				const author = await userService.fetchUser(article.get("author"));
 
-				questions.push({
-					id: question.id,
-					title: question.get("title"),
-					content: question.get("content"),
-					category: question.get("category"),
-					date: question.get("date").toDate(),
+				articles.push({
+					id: article.id,
+					title: article.get("title"),
+					content: article.get("content"),
+					category: article.get("category"),
+					date: article.get("date").toDate(),
 					userData: author
 				});
 
 			}
 
-			return questions;
+			return articles;
 		}	
 		catch(error) {
 			throw new Error("حدث خطأ");
 		}
 	}
 
-	async fetchArticle(id) {
+	async getArticle(id) {
 
 		const userService = new UserService();
 
 		try {
 			
-			const question = await firebase.firestore().collection("questions").doc(id).get();
+			const article = await firebase.firestore().collection("articles").doc(id).get();
 
-			if(question.exists) {
+			if(article.exists) {
 	
-				const author = await userService.fetchUser(question.get("author"));
+				const author = await userService.fetchUser(article.get("author"));
 
 				return {
-					id: question.id,
-					title: question.get("title"),
-					content: question.get("content"),
-					category: question.get("category"),
-					date: question.get("date").toDate(),
+					id: article.id,
+					title: article.get("title"),
+					content: article.get("content"),
+					category: article.get("category"),
+					date: article.get("date").toDate(),
 					userData: author
 				};
 			}
