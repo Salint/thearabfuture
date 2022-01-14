@@ -47,7 +47,7 @@ class QuestionService {
 
 				let answers = [];
 
-				const answerResult = await firebase.firestore().collection("questions").doc(id).collection("answers").orderBy("date", "desc").get();
+				const answerResult = await firebase.firestore().collection("questions").doc(id).collection("answers").orderBy("date", "asc").get();
 				
 				for (const answer of answerResult.docs) {
 					
