@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH, faUserShield } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisH, faPencilAlt, faUserShield } from "@fortawesome/free-solid-svg-icons";
 
 import Container from "../atoms/Container";
 
@@ -111,21 +111,29 @@ const UserName = styled.h1`
 	}
 `;
 
-const Moderator = styled.p`
+const Role = styled.p`
 	font-size: 17px;
-	background: var(--main-color);
 	width: 100px;
 	color: white;
-	margin: -5px auto 0 auto;
 	border-radius: 5px;
 	padding: 5px 0;
-	
+	display: inline-block;
+	margin: -5px 10px 0 10px;
+
 	@media (max-width: 800px) {
-		margin: -2px auto 0 auto;
+		margin: -2px 10px 0 10px;
 		font-size: 15px;
 		padding: 2px 0;
 		width: 80px;
 	}
+`;
+
+const Moderator = styled(Role)`
+	background: var(--main-color);
+`;
+
+const Writer = styled(Role)`
+	background: rgb(212, 92, 0);
 `;
 
 const About = styled.p`
@@ -154,7 +162,7 @@ const StatNumber = styled.span`
 const ProfileElement = ({ user, personal, onLogout }) => {
 
 	const [ options, toggleOptions ] = useState(false);
-	const { username, about, profileURL, bannerURL,  moderator, followers, posts } = user;
+	const { username, about, profileURL, bannerURL, moderator, writer, followers, posts } = user;
 
 	return (
 		<BaseContainer>
@@ -175,6 +183,7 @@ const ProfileElement = ({ user, personal, onLogout }) => {
 					}
 					<UserName>{username}</UserName>
 					{ moderator && <Moderator><FontAwesomeIcon icon={faUserShield} /> مشرف</Moderator> }
+					{ writer && <Writer><FontAwesomeIcon icon={faPencilAlt} /> كاتب</Writer> }
 					{ about && <About>{about}</About> }
 					<Stats>
 						<Stat><StatNumber>{followers}</StatNumber> متابعون</Stat>

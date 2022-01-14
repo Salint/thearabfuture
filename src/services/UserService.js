@@ -10,6 +10,7 @@ class UserService {
 
 			if(result.exists) {
 				const isModerator = await this.isUserModerator(uid);
+				const isWriter = await this.isUserWriter(uid);
 				const profileURL = await this.getUserProfileURL(uid);
 				const bannerURL = await this.getUserBannerURL(uid);
 
@@ -18,6 +19,7 @@ class UserService {
 					username: result.get("username"),
 					about: result.get("about"),
 					moderator: isModerator,
+					writer: isWriter,
 					profileURL: profileURL,
 					bannerURL: bannerURL,
 					followers: 0,
@@ -52,6 +54,25 @@ class UserService {
 		try {
 			
 			const result = await firebase.firestore().collection("config").where("moderators", "array-contains", uid).get();
+
+			if(!result.empty) {
+				return true;
+			}
+			
+			return false;
+
+		}
+		catch(error) {
+			throw error;
+		}
+
+	}
+
+	async isUserWriter(uid) {
+
+		try {
+			
+			const result = await firebase.firestore().collection("config").where("writers", "array-contains", uid).get();
 
 			if(!result.empty) {
 				return true;
