@@ -52,7 +52,7 @@ const Link = styled(BaseLink)`
 const ArticlesPageTemplate = ({ error, pending, isWriter, articles }) => (
 	<PageTemplate>
 		{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
-		{ (!pending && isWriter) && <Link to="/questions/new">مقال جديد</Link>}
+		{ (!pending && isWriter) && <Link to="/articles/new">مقال جديد</Link>}
 		{ articles.length === 0 && !pending && <Warning>لا توجد مقالات حتى الآن.</Warning> }
 		{ articles && articles.map(article => <Article key={article.id} article={article} />) }
 	</PageTemplate>

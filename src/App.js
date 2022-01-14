@@ -23,6 +23,7 @@ import NewQuestion from "./components/pages/questions/NewQuestion";
 import Question from "./components/pages/questions/Question";
 
 import Articles from "./components/pages/Articles";
+import NewArticle from "./components/pages/articles/NewArticle";
 import Article from "./components/pages/articles/Article";
 
 // Cool styling ;)
@@ -71,6 +72,7 @@ const App = () => {
 						<Route path="/questions/:id" component={Question} />
 
 						<Route exact path="/articles" component={Articles} />
+						<Route exact path="/articles/new" component={NewArticle} />
 						<Route path="/articles/:id" component={Article} />
 						
 						<Route component={NotFound} />
