@@ -105,7 +105,19 @@ const SignupForm = () => {
 		}
 		catch({ message }) {
 			setPending(false);
-			setError(message);
+			
+			if(error.code === "auth/account-exists-with-different-credential") {
+				setError("يوجد حساب بهذا البريد بالفعل");
+			}
+			else if(error.code === "auth/popup-blocked") {
+				setError("تم حظر الـ Popup بواسطة المتصفح");
+			}
+			else if(error.code === "auth/popup-closed-by-user") {
+				setError("تم إغلاق الـ Popup بواسطة المستخدم");
+			}
+			else {
+				setError("حدث خطأ, الرجاء المحاولة لاحقاً");
+			}
 		}
 	}
 

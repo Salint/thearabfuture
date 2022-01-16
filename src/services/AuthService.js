@@ -43,7 +43,7 @@ class AuthService {
 					provider = new firebase.auth.GoogleAuthProvider();
 					break;
 				default:
-					const error  = new Error("حدث خطأ, الرجاء المحاولة لاحقاً");
+					const error  = new Error("Invalid provider");
 					error.code = "auth/invalid-provider";
 					throw new Error(error);
 			}
@@ -56,18 +56,7 @@ class AuthService {
 
 		}
 		catch(error) {
-			if(error.code === "auth/account-exists-with-different-credential") {
-				throw new Error("يوجد حساب بهذا البريد بالفعل");
-			}
-			else if(error.code === "auth/popup-blocked") {
-				throw new Error("تم حظر الـ Popup بواسطة المتصفح");
-			}
-			else if(error.code === "auth/popup-closed-by-user") {
-				throw new Error("تم إغلاق الـ Popup بواسطة المستخدم");
-			}
-			else {
-				throw new Error("حدث خطأ, الرجاء المحاولة لاحقاً");
-			}
+			throw error;
 		}
 	}
 	async logOut() {
