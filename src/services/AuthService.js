@@ -14,19 +14,8 @@ class AuthService {
 			});
 
 		}
-		catch({ code }) {
-			if(code === "auth/email-already-in-use") {
-				throw new Error("يوجد حساب بهذا البريد بالفعل");
-			}
-			else if(code === "auth/invalid-email") {
-				throw new Error("الرجاء ادخال بريد صحيح");
-			}
-			else if(code === "auth/weak-password") {
-				throw new Error("كلمة السر ضعيفة");
-			}
-			else {
-				throw new Error("حذث خطأ, الرجاء المحاولة لاحقاً");
-			}
+		catch(error) {
+			throw error;
 		}
 	}
 	async LoginWithEmail(email, password) {
@@ -35,22 +24,8 @@ class AuthService {
 			await firebase.auth().signInWithEmailAndPassword(email, password);
 
 		}
-		catch({ code }) {
-			if(code === "auth/user-disabled") {
-				throw new Error("تم حظر هذا الحساب");
-			}
-			else if(code === "auth/invalid-email") {
-				throw new Error("يوجد حساب بهذا البريد بالفعل");
-			}
-			else if(code === "auth/user-not-found") {
-				throw new Error("لا يوجد حساب بهذا البريد");
-			}
-			else if(code === "auth/wrong-password") {
-				throw new Error("كلمة المرور غير صحيحة");
-			}
-			else {
-				throw new Error("حذث خطأ, الرجاء المحاولة لاحقاً");
-			}
+		catch(error) {
+			throw error;
 		}
 	}
 	async AuthWithThirdParty(authProvider) {

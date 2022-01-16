@@ -126,9 +126,24 @@ const SignupForm = () => {
 
 				setSuccess(true);
 			}
-			catch({ message }) {
+			catch({ code }) {
 				setPending(false);
-				setError(message);
+
+				if(code === "auth/user-disabled") {
+					setError("تم حظر هذا الحساب");
+				}
+				else if(code === "auth/invalid-email") {
+					setError("يوجد حساب بهذا البريد بالفعل");
+				}
+				else if(code === "auth/user-not-found") {
+					setError("لا يوجد حساب بهذا البريد");
+				}
+				else if(code === "auth/wrong-password") {
+					setError("كلمة المرور غير صحيحة");
+				}
+				else {
+					setError("حذث خطأ, الرجاء المحاولة لاحقاً");
+				}
 			}
 		}
 	}

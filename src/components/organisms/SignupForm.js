@@ -134,9 +134,21 @@ const SignupForm = () => {
 
 				setSuccess(true);
 			}
-			catch({ message }) {
+			catch({ code }) {
 				setPending(false);
-				setError(message);
+
+				if(code === "auth/email-already-in-use") {
+					setError("يوجد حساب بهذا البريد بالفعل");
+				}
+				else if(code === "auth/invalid-email") {
+					setError("الرجاء ادخال بريد صحيح");
+				}
+				else if(code === "auth/weak-password") {
+					throw new Error("كلمة السر ضعيفة");
+				}
+				else {
+					throw new Error("حذث خطأ, الرجاء المحاولة لاحقاً");
+				}
 			}
 		}
 	}
