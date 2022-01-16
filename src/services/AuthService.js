@@ -53,6 +53,37 @@ class AuthService {
 			}
 		}
 	}
+	async AuthWithThirdParty(authProvider) {
+		try {
+			let provider;
+
+			switch (authProvider) {
+				case "github":
+					provider = new firebase.auth.GithubAuthProvider();
+					break;
+				case "facebook":
+					provider = new firebase.auth.FacebookAuthProvider();
+					break;
+				case "google":
+					provider = new firebase.auth.GoogleAuthProvider();
+					break;
+				default:
+					const error  = new Error("حدث خطأ, الرجاء المحاولة لاحقاً");
+					error.code = "auth/invalid-provider";
+					throw new Error(error);
+			}
+
+			const userCredential = await firebase.auth().signInWithPopup(provider);
+
+			await firebase.firestore().collection("users").doc(userCredential.user.uid).set({
+				username: userCredential.user.displayName
+			});
+
+		}
+		catch(error) {
+			throw error;
+		}
+	}
 	async logOut() {
 		try {
 			await firebase.auth().signOut();
