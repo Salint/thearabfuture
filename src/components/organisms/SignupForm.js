@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import styled from "styled-components";
 import AuthService from "../../services/AuthService";
 import Error from "../atoms/Error";
@@ -22,6 +23,19 @@ const Form = styled.form`
 		width: 90%;
 	}
 `;
+
+const ThirdPartyButton = styled.button`
+	width: 70%;
+	font-size: 16px;
+	padding: 8px 0;
+	border: none;
+	color: white;
+	margin: 2px 0;
+	cursor: pointer;
+`;
+
+const GitHub = styled(ThirdPartyButton)`background: black;`;
+const Facebook = styled(ThirdPartyButton)`background: #4267B2;`;
 
 const InputField = styled(Field)`
 	direction: ltr;
@@ -78,6 +92,23 @@ const SignupForm = () => {
 		})
 	};
 
+	const AuthWithThirdParty = async (e, provider) => {
+		e.preventDefault();
+
+		setPending(true); 
+		
+		try {
+
+			await auth.AuthWithThirdParty(provider);
+
+			setSuccess(true);
+		}
+		catch({ message }) {
+			setPending(false);
+			setError(message);
+		}
+	}
+
 	const Submit = async (e) => {
 		e.preventDefault();
 
@@ -114,6 +145,8 @@ const SignupForm = () => {
 		<Form onSubmit={e => Submit(e)}>
 			<H1>إنشاء حساب</H1>
 			{ error && <Error width="70%">{error}</Error> }
+			<GitHub type="button" onClick={e => AuthWithThirdParty(e, "github")} ><FontAwesomeIcon icon={faGithub} /> تسجيل الدخول بإستخدام GitHub</GitHub>
+			<Facebook type="button" onClick={e => AuthWithThirdParty(e, "facebook")} ><FontAwesomeIcon icon={faFacebook} /> تسجيل الدخول بإستخدام Facebook</Facebook>
 			<InputField 
 				displayName="أسم المستخدم" 
 				name="username"
