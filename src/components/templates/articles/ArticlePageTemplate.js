@@ -34,7 +34,7 @@ const ArticlePageTemplate = ({ error, pending, article }) => (
 
 	<PageTemplate>
 		{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
-		{ (!pending && error === "article/article-not-found") && <NotFound /> }
+		{ (!pending && error) && <NotFound /> }
 		{ (!pending && !error) && <ArticleElement article={article} /> }
 	</PageTemplate>
 );
