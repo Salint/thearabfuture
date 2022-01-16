@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import styled from "styled-components";
 import AuthService from "../../services/AuthService";
 import Error from "../atoms/Error";
@@ -36,7 +36,6 @@ const ThirdPartyButton = styled.button`
 
 const GitHub = styled(ThirdPartyButton)`background: black;`;
 const Facebook = styled(ThirdPartyButton)`background: #4267B2;`;
-const Google = styled(ThirdPartyButton)`background: #DB4437;`;
 
 const InputField = styled(Field)`
 	direction: ltr;
@@ -140,7 +139,6 @@ const SignupForm = () => {
 			{ error && <Error width="70%">{error}</Error> }
 			<GitHub type="button" onClick={e => AuthWithThirdParty(e, "github")} ><FontAwesomeIcon icon={faGithub} /> تسجيل الدخول بإستخدام GitHub</GitHub>
 			<Facebook type="button" onClick={e => AuthWithThirdParty(e, "facebook")} ><FontAwesomeIcon icon={faFacebook} /> تسجيل الدخول بإستخدام Facebook</Facebook>
-			<Google type="button" onClick={e => AuthWithThirdParty(e, "google")} ><FontAwesomeIcon icon={faGoogle} /> تسجيل الدخول بإستخدام Google</Google>
 			<InputField 
 				displayName="البريد الإلكتروني" 
 				name="email"
