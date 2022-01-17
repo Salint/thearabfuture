@@ -31,7 +31,7 @@ class QuestionService {
 			return questions;
 		}	
 		catch(error) {
-			throw new Error("حدث خطأ");
+			throw error;
 		}
 	}
 
@@ -81,9 +81,7 @@ class QuestionService {
 			}
 		}	
 		catch(error) {
-			// TODO Handle error message on display, not here.
-			if(error.code !== "question/question-not-found") throw new Error("حدث خطأ");
-			else throw error;
+			throw error;
 		}
 	}
 
@@ -99,7 +97,7 @@ class QuestionService {
 			});
 		}
 		catch(error) {
-			throw new Error("حدث خطأ أثناء نشر السؤال");
+			throw error;
 		}
 	}
 
@@ -112,7 +110,7 @@ class QuestionService {
 			})
 		}
 		catch(error) {
-			throw new Error("حدث خطأ أثناء نشر السؤال");
+			throw error;
 		}
 	}
 

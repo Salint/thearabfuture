@@ -104,7 +104,7 @@ const AnswerForm = ({ id }) => {
 		
 		if(input.length === 0) {
 			
-			setError("يرجى املاء جميع الخانات");
+			setError("question/empty-fields");
 			setPending(false);
 				
 		}
@@ -116,7 +116,7 @@ const AnswerForm = ({ id }) => {
 				setSuccess(true);
 			}
 			catch(error) {
-				setError(error.message);
+				setError("question/unknown-error");
 			}
 		}
 
@@ -128,7 +128,9 @@ const AnswerForm = ({ id }) => {
 				<Form onSubmit={e => Submit(e)}>
 					{ success && <Redirect to="/questions" /> }
 					<Title>الديك إجابه؟</Title>
-					{ error && <Error>{error}</Error> }
+					
+					{ error === "question/empty-fields" && <Error>الرجاء إملاء جميع الخانات</Error> }
+					{ error === "question/unknown-error" && <Error>حدث خطأ</Error>  }
 					
 					<Label>الاجابة:</Label>
 					<Editor>

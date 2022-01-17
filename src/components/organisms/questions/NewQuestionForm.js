@@ -89,7 +89,7 @@ const NewQuestionForm = () => {
 	const Submit = async (e) => {
 		e.preventDefault();
 	
-		setPending(false);
+		setPending(true);
 		setError("");
 
 		
@@ -97,7 +97,7 @@ const NewQuestionForm = () => {
 			input.category.length === 0|| 
 			input.content.length === 0) {
 			
-			setError("يرجى املاء جميع الخانات");
+			setError("question/empty-fields");
 			setPending(false);
 				
 		}
@@ -109,7 +109,8 @@ const NewQuestionForm = () => {
 				setSuccess(true);
 			}
 			catch(error) {
-				setError(error.message);
+				setError("question/unknown-error");
+				setPending(false);
 			}
 		}
 
@@ -119,7 +120,8 @@ const NewQuestionForm = () => {
 		<Form onSubmit={e => Submit(e)}>
 			{ success && <Redirect to="/questions" /> }
 			<Title>إطرح سؤالاً</Title>
-			{ error && <Error>{error}</Error> }
+			{ error === "question/empty-fields" && <Error>الرجاء إملاء جميع الخانات</Error> }
+			{ error === "question/unknown-error" && <Error>حدث خطأ</Error>  }
 			<InputField 
 				displayName="العنوان" 
 				name="title"
