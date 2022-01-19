@@ -14,19 +14,8 @@ class AuthService {
 			});
 
 		}
-		catch({ code }) {
-			if(code === "auth/email-already-in-use") {
-				throw new Error("يوجد حساب بهذا البريد بالفعل");
-			}
-			else if(code === "auth/invalid-email") {
-				throw new Error("الرجاء ادخال بريد صحيح");
-			}
-			else if(code === "auth/weak-password") {
-				throw new Error("كلمة السر ضعيفة");
-			}
-			else {
-				throw new Error("حذث خطأ, الرجاء المحاولة لاحقاً");
-			}
+		catch(error) {
+			throw error;
 		}
 	}
 	async LoginWithEmail(email, password) {
@@ -35,22 +24,8 @@ class AuthService {
 			await firebase.auth().signInWithEmailAndPassword(email, password);
 
 		}
-		catch({ code }) {
-			if(code === "auth/user-disabled") {
-				throw new Error("تم حظر هذا الحساب");
-			}
-			else if(code === "auth/invalid-email") {
-				throw new Error("يوجد حساب بهذا البريد بالفعل");
-			}
-			else if(code === "auth/user-not-found") {
-				throw new Error("لا يوجد حساب بهذا البريد");
-			}
-			else if(code === "auth/wrong-password") {
-				throw new Error("كلمة المرور غير صحيحة");
-			}
-			else {
-				throw new Error("حذث خطأ, الرجاء المحاولة لاحقاً");
-			}
+		catch(error) {
+			throw error;
 		}
 	}
 	async AuthWithThirdParty(authProvider) {
@@ -68,7 +43,7 @@ class AuthService {
 					provider = new firebase.auth.GoogleAuthProvider();
 					break;
 				default:
-					const error  = new Error("حدث خطأ, الرجاء المحاولة لاحقاً");
+					const error  = new Error("Invalid provider");
 					error.code = "auth/invalid-provider";
 					throw new Error(error);
 			}
@@ -81,18 +56,7 @@ class AuthService {
 
 		}
 		catch(error) {
-			if(error.code === "auth/account-exists-with-different-credential") {
-				throw new Error("يوجد حساب بهذا البريد بالفعل");
-			}
-			else if(error.code === "auth/popup-blocked") {
-				throw new Error("تم حظر الـ Popup بواسطة المتصفح");
-			}
-			else if(error.code === "auth/popup-closed-by-user") {
-				throw new Error("تم إغلاق الـ Popup بواسطة المستخدم");
-			}
-			else {
-				throw new Error("حدث خطأ, الرجاء المحاولة لاحقاً");
-			}
+			throw error;
 		}
 	}
 	async logOut() {

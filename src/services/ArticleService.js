@@ -64,9 +64,7 @@ class ArticleService {
 			}
 		}	
 		catch(error) {
-			// TODO Handle error message on display, not here.
-			if(error.code !== "article/article-not-found") throw new Error("حدث خطأ");
-			else throw error;
+			throw error;
 		}
 	}
 

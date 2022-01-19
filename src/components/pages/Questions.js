@@ -3,7 +3,7 @@ import QuestionService from "../../services/QuestionService";
 
 import QuestionsPageTemplate from "../templates/QuestionsPageTemplate";
 
-const Questions = ({ match }) => {
+const Questions = () => {
 	
 	const questionService = new QuestionService();
 
@@ -23,7 +23,7 @@ const Questions = ({ match }) => {
 				setPending(false)
 			}
 			catch(error) {
-				setError(error);
+				setError("question/unknown-error");
 				setPending(false);
 			}
 	})();
@@ -42,7 +42,6 @@ const Questions = ({ match }) => {
 	
 	if(error.length > 0) {
 
-		console.log("error");
 		return <QuestionsPageTemplate 
 			error={error} 
 			questions={[]}	

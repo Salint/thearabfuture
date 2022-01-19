@@ -35,7 +35,7 @@ const QuestionPageTemplate = ({ error, pending, question }) => (
 
 	<PageTemplate>
 		{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
-		{ (!pending && error === "question/question-not-found") && <NotFound /> }
+		{ (!pending && error) && <NotFound /> }
 		{ (!pending && !error) && 
 			<>
 				<QuestionElement question={question} /> 

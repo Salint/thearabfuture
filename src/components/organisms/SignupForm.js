@@ -105,7 +105,19 @@ const SignupForm = () => {
 		}
 		catch({ message }) {
 			setPending(false);
-			setError(message);
+			
+			if(error.code === "auth/account-exists-with-different-credential") {
+				setError("يوجد حساب بهذا البريد بالفعل");
+			}
+			else if(error.code === "auth/popup-blocked") {
+				setError("تم حظر الـ Popup بواسطة المتصفح");
+			}
+			else if(error.code === "auth/popup-closed-by-user") {
+				setError("تم إغلاق الـ Popup بواسطة المستخدم");
+			}
+			else {
+				setError("حدث خطأ, الرجاء المحاولة لاحقاً");
+			}
 		}
 	}
 
@@ -134,9 +146,21 @@ const SignupForm = () => {
 
 				setSuccess(true);
 			}
-			catch({ message }) {
+			catch({ code }) {
 				setPending(false);
-				setError(message);
+
+				if(code === "auth/email-already-in-use") {
+					setError("يوجد حساب بهذا البريد بالفعل");
+				}
+				else if(code === "auth/invalid-email") {
+					setError("الرجاء ادخال بريد صحيح");
+				}
+				else if(code === "auth/weak-password") {
+					throw new Error("كلمة السر ضعيفة");
+				}
+				else {
+					throw new Error("حذث خطأ, الرجاء المحاولة لاحقاً");
+				}
 			}
 		}
 	}
