@@ -189,6 +189,8 @@ const SignupForm = () => {
 				type="submit"
 				disabled={pending}
 			>تسجيل الدخول</Button>
+			<P><A to="/forgot-password">نسيت كلمة السر؟</A></P>
+			<br />
 			<P>ليس لديك حساب؟ <A to="/signup">إنشاء حساب</A></P>
 			{ success && <Redirect to="/"/> }
 		</Form>

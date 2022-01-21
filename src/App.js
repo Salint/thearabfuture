@@ -9,6 +9,7 @@ import HomePage from "./components/pages/HomePage";
 
 import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
+import ForgotPassword from "./components/pages/ForgotPassword";
 
 import Profile from "./components/pages/Profile";
 
@@ -64,6 +65,7 @@ const App = () => {
 
 							<Route exact path="/signup" component={Signup} />
 							<Route exact path="/login" component={Login} />
+							<Route exact path="/forgot-password" component={ForgotPassword} />
 
 							<Route path="/profile/:id" component={Profile} />
 
