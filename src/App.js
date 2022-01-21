@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import firebase from "./services/FirebaseService";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AutoScroll from "./components/atoms/AutoScroll";
 
 // Pages
 import HomePage from "./components/pages/HomePage";
@@ -53,30 +54,32 @@ const App = () => {
 		<UserContext.Provider value={user}>
 			<React.StrictMode>
 				<BrowserRouter>
-					<Switch>
-						<Route exact path="/" component={HomePage} />
-						<Route exact path="/signup" component={Signup} />
-						<Route exact path="/login" component={Login} />
-						<Route path="/profile/:id" component={Profile} />
+					<AutoScroll>
+						<Switch>
+							<Route exact path="/" component={HomePage} />
+							<Route exact path="/signup" component={Signup} />
+							<Route exact path="/login" component={Login} />
+							<Route path="/profile/:id" component={Profile} />
 
-						<Route exact path="/terms" component={TermsOfService} />
+							<Route exact path="/terms" component={TermsOfService} />
 
-						<Route exact path="/settings" component={Settings} />
-						<Route exact path="/settings/profile" component={SettingsProfilePicture} />
-						<Route exact path="/settings/cover" component={SettingsCoverPicture} />
+							<Route exact path="/settings" component={Settings} />
+							<Route exact path="/settings/profile" component={SettingsProfilePicture} />
+							<Route exact path="/settings/cover" component={SettingsCoverPicture} />
 
-						<Route exact path="/projects" component={Projects} />
+							<Route exact path="/projects" component={Projects} />
 
-						<Route exact path="/questions" component={Questions} />
-						<Route exact path="/questions/new" component={NewQuestion} />
-						<Route path="/questions/:id" component={Question} />
+							<Route exact path="/questions" component={Questions} />
+							<Route exact path="/questions/new" component={NewQuestion} />
+							<Route path="/questions/:id" component={Question} />
 
-						<Route exact path="/articles" component={Articles} />
-						<Route exact path="/articles/new" component={NewArticle} />
-						<Route path="/articles/:id" component={Article} />
-						
-						<Route component={NotFound} />
-					</Switch>
+							<Route exact path="/articles" component={Articles} />
+							<Route exact path="/articles/new" component={NewArticle} />
+							<Route path="/articles/:id" component={Article} />
+							
+							<Route component={NotFound} />
+						</Switch>
+					</AutoScroll>
 				</BrowserRouter>
 			</React.StrictMode>
 		</UserContext.Provider>
