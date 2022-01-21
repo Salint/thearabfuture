@@ -5,10 +5,11 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // Pages
 import HomePage from "./components/pages/HomePage";
+
 import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
+
 import Profile from "./components/pages/Profile";
-import NotFound from "./components/pages/NotFound";
 
 import TermsOfService from "./components/pages/legal/TermsOfService";
 
@@ -25,6 +26,8 @@ import Question from "./components/pages/questions/Question";
 import Articles from "./components/pages/Articles";
 import NewArticle from "./components/pages/articles/NewArticle";
 import Article from "./components/pages/articles/Article";
+
+import NotFound from "./components/pages/NotFound";
 
 // Cool styling ;)
 import "./style.css";
@@ -55,8 +58,10 @@ const App = () => {
 				<BrowserRouter>
 					<Switch>
 						<Route exact path="/" component={HomePage} />
+
 						<Route exact path="/signup" component={Signup} />
 						<Route exact path="/login" component={Login} />
+
 						<Route path="/profile/:id" component={Profile} />
 
 						<Route exact path="/terms" component={TermsOfService} />
