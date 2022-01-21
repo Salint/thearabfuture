@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import firebase from "./services/FirebaseService";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AutoScroll from "./components/atoms/AutoScroll";
 
 // Pages
 import HomePage from "./components/pages/HomePage";
