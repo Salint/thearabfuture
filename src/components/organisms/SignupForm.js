@@ -61,6 +61,7 @@ const Button = styled.button`
 
 const P = styled.p`
 	font-size: 16px;
+	text-align: center;
 `;
 const A = styled(Link)`
 	color: #41abe8;
@@ -211,7 +212,7 @@ const SignupForm = () => {
 				type="submit"
 				disabled={pending}
 			>أنشئ حساب</Button>
-			<P>بإنشائك حساب, فأنت توافق على <A to="/terms">شروط الخدمة</A>.</P>
+			<P>بإنشائك حساب, فأنت توافق على <A to="/terms">شروط الخدمة</A> و <A to="/privacy">سياسة الخصوصية</A>.</P>
 			<br />
 			<P>لديك حساب بالفعل؟ <A to="/login">تسجيل الدخول</A></P>
 			{ success && <Redirect to="/"/> }
