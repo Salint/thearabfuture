@@ -112,7 +112,6 @@ const Footer = () => (
 					<li><ListLink to="/projects">المشاريع</ListLink></li>
 					<li><ListLink to="/questions">الأسئلة</ListLink></li>
 					<li><ListLink to="/articles">المقالات</ListLink></li>
-					<li><ListLink to="/credits">المطورين</ListLink></li>
 				</List>
 				<List>
 					<ListTitle>السياسات</ListTitle>

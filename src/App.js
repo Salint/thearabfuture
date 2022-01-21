@@ -6,10 +6,11 @@ import AutoScroll from "./components/atoms/AutoScroll";
 
 // Pages
 import HomePage from "./components/pages/HomePage";
+
 import Signup from "./components/pages/Signup";
 import Login from "./components/pages/Login";
+
 import Profile from "./components/pages/Profile";
-import NotFound from "./components/pages/NotFound";
 
 import TermsOfService from "./components/pages/legal/TermsOfService";
 
@@ -26,6 +27,8 @@ import Question from "./components/pages/questions/Question";
 import Articles from "./components/pages/Articles";
 import NewArticle from "./components/pages/articles/NewArticle";
 import Article from "./components/pages/articles/Article";
+
+import NotFound from "./components/pages/NotFound";
 
 // Cool styling ;)
 import "./style.css";
@@ -54,32 +57,32 @@ const App = () => {
 		<UserContext.Provider value={user}>
 			<React.StrictMode>
 				<BrowserRouter>
-					<AutoScroll>
-						<Switch>
-							<Route exact path="/" component={HomePage} />
-							<Route exact path="/signup" component={Signup} />
-							<Route exact path="/login" component={Login} />
-							<Route path="/profile/:id" component={Profile} />
+					<Switch>
+						<Route exact path="/" component={HomePage} />
 
-							<Route exact path="/terms" component={TermsOfService} />
+						<Route exact path="/signup" component={Signup} />
+						<Route exact path="/login" component={Login} />
 
-							<Route exact path="/settings" component={Settings} />
-							<Route exact path="/settings/profile" component={SettingsProfilePicture} />
-							<Route exact path="/settings/cover" component={SettingsCoverPicture} />
+						<Route path="/profile/:id" component={Profile} />
 
-							<Route exact path="/projects" component={Projects} />
+						<Route exact path="/terms" component={TermsOfService} />
 
-							<Route exact path="/questions" component={Questions} />
-							<Route exact path="/questions/new" component={NewQuestion} />
-							<Route path="/questions/:id" component={Question} />
+						<Route exact path="/settings" component={Settings} />
+						<Route exact path="/settings/profile" component={SettingsProfilePicture} />
+						<Route exact path="/settings/cover" component={SettingsCoverPicture} />
 
-							<Route exact path="/articles" component={Articles} />
-							<Route exact path="/articles/new" component={NewArticle} />
-							<Route path="/articles/:id" component={Article} />
-							
-							<Route component={NotFound} />
-						</Switch>
-					</AutoScroll>
+						<Route exact path="/projects" component={Projects} />
+
+						<Route exact path="/questions" component={Questions} />
+						<Route exact path="/questions/new" component={NewQuestion} />
+						<Route path="/questions/:id" component={Question} />
+
+						<Route exact path="/articles" component={Articles} />
+						<Route exact path="/articles/new" component={NewArticle} />
+						<Route path="/articles/:id" component={Article} />
+						
+						<Route component={NotFound} />
+					</Switch>
 				</BrowserRouter>
 			</React.StrictMode>
 		</UserContext.Provider>
