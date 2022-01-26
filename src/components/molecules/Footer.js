@@ -25,7 +25,11 @@ const Container = styled.div`
 	flex: 1;
 `;
 const SummaryContainer = styled(Container)`
-	text-align: center;
+	direction: ltr;
+
+	@media (max-width: 900px) {
+		text-align: center;
+	}
 `;
 const Image = styled.img`
 	opacity: 0.5;
@@ -65,6 +69,7 @@ const LinksContainer = styled(Container)`
 const List = styled.ul`
 	flex: 1;
 	list-style-type: none;
+
 	@media (max-width: 700px) {
 		text-align: center;
 	}
