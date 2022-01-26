@@ -1,14 +1,16 @@
 import React from "react";
+import { AuthProvider, IfFirebaseAuthed, IfFirebaseUnAuthed } from "../../context/FirebaseAuthContext";
 import styled from "styled-components";
 
 import PageTemplate from "./PageTemplate";
 
 import NavigationBar from "../organisms/Navbar";
+import Dashboard from "../organisms/Dashboard";
 
 import Introduction from "../molecules/home/Introduction";
 import Acceptance from "../molecules/home/Acceptance";
 
-import HeaderImage from "../../static/images/header.png"
+import HeaderImage from "../../static/images/header.png";
 
 const Header = styled.nav`
 	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${HeaderImage}) center no-repeat;
@@ -40,17 +42,24 @@ const H4 = styled.p`
 	}
 `;
 
-const HomePageTemplate = () => (
+const HomePageTemplate = ({ questions }) => (
 	<PageTemplate navbar="off">
-		<Header>
-			<NavigationBar theme="light" />
-			<Section>
-				<H1>The Arab Future</H1>
-				<H4>مقر كل مبرمج عربي...</H4>
-			</Section>
-		</Header>
-		<Introduction />
-		<Acceptance />
+		<AuthProvider>
+			<IfFirebaseUnAuthed>
+				<Header>
+					<NavigationBar theme="light" />
+					<Section>
+						<H1>The Arab Future</H1>
+						<H4>مقر كل مبرمج عربي...</H4>
+					</Section>
+				</Header>
+				<Introduction />
+				<Acceptance />
+			</IfFirebaseUnAuthed>
+			<IfFirebaseAuthed>
+				<Dashboard />
+			</IfFirebaseAuthed>
+		</AuthProvider>
 	</PageTemplate>
 );
 
