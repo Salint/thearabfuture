@@ -17,4 +17,11 @@ firebase.initializeApp(firebaseConfig);
 
 firebase.auth().languageCode = "ar";
 
+if(window.location.hostname === "localhost") {
+
+	firebase.auth().useEmulator("http://localhost:9099"); // Authentication
+	firebase.firestore().useEmulator("localhost", "8080"); // Firestore
+	firebase.storage().useEmulator("localhost", "9199"); // Storage
+}
+
 export default firebase;
