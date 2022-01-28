@@ -13,7 +13,6 @@ const Nav = styled.nav`
 	height: 80px;
 	align-items: center;
 	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
-	z-index: 5;
 	${props => props.float && css`
 		background: var(--primary-background);
 		border-bottom: 1px solid rgb(220, 220, 220);
@@ -69,7 +68,7 @@ const UL = styled.ul`
 		height: 100%;
 		width: 60%;
 		padding-top: 50px;
-		z-index: 0;
+		z-index: 5;
 		top: 0;
 		left: ${props => props.active ? "0" : "-60%"};
 		overflow: hidden;
