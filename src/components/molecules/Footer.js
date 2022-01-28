@@ -62,7 +62,7 @@ const SocialLink = styled.a`
 	}
 `;
 const LinksContainer = styled(Container)`
-	flex: 5;
+	flex: 1;
 	display: flex;	
 `;
 
@@ -122,10 +122,6 @@ const Footer = () => (
 					<ListTitle>السياسات</ListTitle>
 					<li><ListLink to="/terms">شروط الخدمة</ListLink></li>
 					<li><ListLink to="/privacy">سياسة الخصوصية</ListLink></li>
-				</List>
-				<List>
-					<ListTitle>للمطورين</ListTitle>
-					<li><ListLink to="/help/api">API</ListLink></li>
 				</List>
 			</LinksContainer>
 		</LinksSection>

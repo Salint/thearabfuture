@@ -11,6 +11,7 @@ import HeaderImage from "../../static/images/dashboard.jpg";
 import LoadingPicture from "../../static/images/loading.png";
 import QuestionService from "../../services/QuestionService";
 import UserContext from "../../context/UserContext";
+import ContainerUI from "../atoms/Container";
 
 const Rotate = keyframes`
 	from {
@@ -31,6 +32,7 @@ const Image = styled.img`
 	animation: ${Rotate} 1s infinite;
 	animation-timing-function: linear;
 	opacity: 0.5;
+	margin: 0 auto;
 `;
 
 
@@ -48,30 +50,20 @@ const DashboardContainer = styled.nav`
 	}
 `;
 
-const Container = styled.section`
-	display: flex;
+const Container = styled(ContainerUI)`
 	height: calc(100% - 130px);
 	margin-bottom: 20px;
-	
-	@media (max-width: 800px) {
-		flex-direction: column;
-	}
-`;
-	
-const Section = styled.section`
-	flex: 1;
 	background: var(--primary-background);
-	height: 100%;
-	margin: 0 20px;
 	border-radius: 5px;
 	padding: 15px;
 	border-bottom: 5px solid var(--primary-border);
-
+	position: relative;
+	
 	@media (max-width: 800px) {
 		flex-direction: column;
-		margin: 20px;
 	}
 `;
+	
 const SectionTitle = styled.h1`
 	font-size: 30px;
 	color: var(--primary-text);
@@ -80,7 +72,6 @@ const SectionTitle = styled.h1`
 const Question = styled.section`
 	width: 100%;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-	margin: 20px 0;
 	border-radius: 5px;
 	padding: 15px;
 `;
@@ -132,22 +123,17 @@ const DashboardUI = ({ pending, questions }) => (
 	<DashboardContainer>
 		<NavigationBar theme="light" />
 		<Container>
-			<Section>
-				<SectionTitle>اسئلتك</SectionTitle>
-				
-				{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
-				{ !pending && questions.map(({ id, title, content, answers }) => <Question>
-					<QuestionTitle>{title}</QuestionTitle>
-					<QuestionContent>{content}</QuestionContent>
-					<QuestionInfo>
-						<QuestionStat><FontAwesomeIcon icon={faComments} /> {answers.length} إجابات</QuestionStat>
-						<QuestionLink to={"/questions/" + id}>فتح</QuestionLink>
-					</QuestionInfo>
-				</Question>)}
-			</Section>
-			<Section>
-				<SectionTitle>ما الجديد؟</SectionTitle>
-			</Section>
+			<SectionTitle>اسئلتك</SectionTitle>
+			
+			{ pending && <Loading><Image src={LoadingPicture} /></Loading> }
+			{ !pending && questions.map(({ id, title, content, answers }) => <Question>
+				<QuestionTitle>{title}</QuestionTitle>
+				<QuestionContent>{content}</QuestionContent>
+				<QuestionInfo>
+					<QuestionStat><FontAwesomeIcon icon={faComments} /> {answers.length} إجابات</QuestionStat>
+					<QuestionLink to={"/questions/" + id}>فتح</QuestionLink>
+				</QuestionInfo>
+			</Question>)}
 		</Container>
 	</DashboardContainer>
 );
