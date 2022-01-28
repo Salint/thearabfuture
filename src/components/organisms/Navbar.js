@@ -89,12 +89,12 @@ const NavLink = styled(Link)`
 	}
 `;
 const Button = styled.button`
-	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
+	color: ${props => (props.theme === "light" || props.isActive) ? "white" : "var(--main-text-color)" };
 	background: none;
 	border: none;
 	font-size: 32px;
 	cursor: pointer;
-	z-index: 1;
+	z-index: 10;
 `;
 
 const NavigationBar = ({ float, theme }) => {
@@ -123,7 +123,7 @@ const NavigationBar = ({ float, theme }) => {
 					</UL>
 				</Container>
 				<BarContainer>
-					<Button onClick={e => setActive(!active)}><FontAwesomeIcon icon={faBars} /></Button>
+					<Button onClick={e => setActive(!active)} isActive={active}><FontAwesomeIcon icon={faBars} /></Button>
 				</BarContainer>
 			</Nav>
 			{float && <NavHelper />}
