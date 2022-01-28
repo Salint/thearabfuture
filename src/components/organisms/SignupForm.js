@@ -32,6 +32,7 @@ const ThirdPartyButton = styled.button`
 	color: white;
 	margin: 2px 0;
 	cursor: pointer;
+	direction: ltr;
 `;
 
 const GitHub = styled(ThirdPartyButton)`background: black;`;
@@ -170,8 +171,8 @@ const SignupForm = () => {
 		<Form onSubmit={e => Submit(e)}>
 			<H1>إنشاء حساب</H1>
 			{ error && <Error width="70%">{error}</Error> }
-			<GitHub type="button" onClick={e => AuthWithThirdParty(e, "github")} ><FontAwesomeIcon icon={faGithub} /> تسجيل الدخول بإستخدام GitHub</GitHub>
-			<Facebook type="button" onClick={e => AuthWithThirdParty(e, "facebook")} ><FontAwesomeIcon icon={faFacebook} /> تسجيل الدخول بإستخدام Facebook</Facebook>
+			<GitHub type="button" onClick={e => AuthWithThirdParty(e, "github")} ><FontAwesomeIcon icon={faGithub} /> GitHub</GitHub>
+			<Facebook type="button" onClick={e => AuthWithThirdParty(e, "facebook")} ><FontAwesomeIcon icon={faFacebook} /> Facebook</Facebook>
 			<InputField 
 				displayName="أسم المستخدم" 
 				name="username"
