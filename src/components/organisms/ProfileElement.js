@@ -163,7 +163,7 @@ const StatNumber = styled.span`
 const ProfileElement = ({ user, personal, onLogout }) => {
 
 	const [ options, toggleOptions ] = useState(false);
-	const { username, about, profileURL, bannerURL, moderator, writer, followers, posts } = user;
+	const { username, about, profileURL, bannerURL, moderator, writer, posts } = user;
 
 	return (
 		<BaseContainer>
