@@ -140,6 +140,7 @@ const About = styled.p`
 	font-size: 17px;
 	margin-top: 10px;
 	color: gray;
+	padding: 0 50px;
 `;
 
 const Stats = styled.section`
