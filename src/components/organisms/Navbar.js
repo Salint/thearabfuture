@@ -13,6 +13,7 @@ const Nav = styled.nav`
 	height: 80px;
 	align-items: center;
 	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
+	z-index: 1;
 	${props => props.float && css`
 		background: var(--primary-background);
 		border-bottom: 1px solid rgb(220, 220, 220);
@@ -68,7 +69,7 @@ const UL = styled.ul`
 		height: 100%;
 		width: 60%;
 		padding-top: 50px;
-		z-index: 5;
+		z-index: 2;
 		top: 0;
 		left: ${props => props.active ? "0" : "-60%"};
 		overflow: hidden;
@@ -94,7 +95,7 @@ const Button = styled.button`
 	border: none;
 	font-size: 32px;
 	cursor: pointer;
-	z-index: 10;
+	z-index: 3;
 `;
 
 const NavigationBar = ({ float, theme }) => {
