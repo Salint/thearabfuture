@@ -13,6 +13,7 @@ class UserService {
 				const isWriter = await this.isUserWriter(uid);
 				const profileURL = await this.getUserProfileURL(uid);
 				const bannerURL = await this.getUserBannerURL(uid);
+				const postCount = await this.getUserPostCount(uid);
 
 				return {
 					uid: uid,
@@ -23,7 +24,7 @@ class UserService {
 					profileURL: profileURL,
 					bannerURL: bannerURL,
 					followers: 0,
-					posts: 0
+					posts: postCount
 				}
 			}
 			else {
@@ -79,6 +80,23 @@ class UserService {
 			}
 			
 			return false;
+
+		}
+		catch(error) {
+			throw error;
+		}
+
+	}
+
+	async getUserPostCount(uid) {
+		
+		try {
+			
+			const questions = await firebase.firestore().collection("questions").where("author", "==", uid).get();
+			
+			const articles = await firebase.firestore().collection("articles").where("author", "==", uid).get();
+
+			return (questions.size + articles.size);
 
 		}
 		catch(error) {
