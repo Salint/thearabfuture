@@ -140,6 +140,7 @@ const About = styled.p`
 	font-size: 17px;
 	margin-top: 10px;
 	color: gray;
+	padding: 0 50px;
 `;
 
 const Stats = styled.section`
@@ -162,7 +163,7 @@ const StatNumber = styled.span`
 const ProfileElement = ({ user, personal, onLogout }) => {
 
 	const [ options, toggleOptions ] = useState(false);
-	const { username, about, profileURL, bannerURL, moderator, writer, followers, posts } = user;
+	const { username, about, profileURL, bannerURL, moderator, writer, posts } = user;
 
 	return (
 		<BaseContainer>
@@ -186,7 +187,6 @@ const ProfileElement = ({ user, personal, onLogout }) => {
 					{ writer && <Writer><FontAwesomeIcon icon={faPencilAlt} /> كاتب</Writer> }
 					{ about && <About>{about}</About> }
 					<Stats>
-						<Stat><StatNumber>{followers}</StatNumber> متابعون</Stat>
 						<Stat><StatNumber>{posts}</StatNumber> منشورات</Stat>
 					</Stats>
 				</UserData>
