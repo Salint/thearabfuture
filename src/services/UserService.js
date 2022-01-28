@@ -23,7 +23,6 @@ class UserService {
 					writer: isWriter,
 					profileURL: profileURL,
 					bannerURL: bannerURL,
-					followers: 0,
 					posts: postCount
 				}
 			}

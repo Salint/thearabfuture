@@ -186,7 +186,6 @@ const ProfileElement = ({ user, personal, onLogout }) => {
 					{ writer && <Writer><FontAwesomeIcon icon={faPencilAlt} /> كاتب</Writer> }
 					{ about && <About>{about}</About> }
 					<Stats>
-						<Stat><StatNumber>{followers}</StatNumber> متابعون</Stat>
 						<Stat><StatNumber>{posts}</StatNumber> منشورات</Stat>
 					</Stats>
 				</UserData>
