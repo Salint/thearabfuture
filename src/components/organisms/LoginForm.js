@@ -29,6 +29,7 @@ const ThirdPartyButton = styled.button`
 	font-size: 16px;
 	padding: 8px 0;
 	border: none;
+	border-radius: 10px;
 	color: white;
 	margin: 2px 0;
 	cursor: pointer;
@@ -51,6 +52,7 @@ const Button = styled.button`
 	background: var(--main-color);
 	color: white;
 	border: none;
+	border-radius: 10px;
 	font-size: 18px;
 	position: relative;
 	top: 10px;
