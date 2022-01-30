@@ -1,16 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Logo from "../../static/images/logo512.png";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../../context/UserContext";
 
+import DefaultUserProfileSource from "../../static/images/user-default.png";
+import UserService from "../../services/UserService";
+
 const Nav = styled.nav`
 	display: flex;
-	padding: 10px 50px;
-	height: 80px;
+	padding: 10px 30px;
+	height: 60px;
 	align-items: center;
 	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
 	z-index: 1;
@@ -34,26 +36,40 @@ const NavHelper = styled.div`
 `;
 
 const Container = styled.div`
-	flex: 1;
+	flex: ${props => props.flex ? props.flex : "1"};
 	display: flex;
 	align-items: center;
 	justify-content: ${props => props.place};
 	overflow: hidden;
 `;
 
+
 const BarContainer = styled.div`
 	display: none;
 	flex: 1;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: left;
 	
-	@media (max-width: 1000px) {
+	@media (max-width: 700px) {
 		display: flex;
 	}
 `;
 
+const LogoContainer = styled(Container)`
+	justify-content: flex-end;
+
+	@media (max-width: 700px) {		
+		justify-content: center;
+	}
+`;
+
 const Image = styled.img`
-	width: 32px;
+	width: 30px;
+`;
+
+const ProfileImage = styled(Image)`
+	border-radius: 50%;
+
 `;
 
 const UL = styled.ul`
@@ -61,36 +77,41 @@ const UL = styled.ul`
 	align-items: center;
 	list-style-type: none;
 
-	@media (max-width: 1000px) {
+	@media (max-width: 700px) {
 		position: fixed;
 		flex-direction: column;
 		align-items: flex-start;
-		background: rgba(0, 0, 0, 0.8);
+		background: var(--primary-background);
 		height: 100%;
-		width: 60%;
+		width: 40%;
 		padding-top: 50px;
 		z-index: 2;
 		top: 0;
 		left: ${props => props.active ? "0" : "-60%"};
 		overflow: hidden;
 		transition: left .5s;
+		border-right: 1px solid var(--primary-border);
 	}
 `;
 
 const NavLink = styled(Link)`
 	text-decoration: none;
 	margin: 0 10px;
-	font-size: 20px;
+	font-size: 17px;
 	color: ${props => props.theme === "light" ? "white" : "var(--main-text-color)" };
 	
-	@media (max-width: 1000px) {
-		font-size: 30px;
-		margin: 10px 10px;
-		color: white;
+	@media (max-width: 700px) {
+		font-size: 20px;
+		margin: 0;
+		padding: 10px;
+		width: 100%;
+		border-bottom: 1px solid var(--primary-border);
+		color: var(--primary-text);
 	}
 `;
+
 const Button = styled.button`
-	color: ${props => (props.theme === "light" || props.isActive) ? "white" : "var(--main-text-color)" };
+	color: ${props => (!props.isActive && props.theme === "light") ? "white" : "black" };
 	background: none;
 	border: none;
 	font-size: 32px;
@@ -101,30 +122,53 @@ const Button = styled.button`
 const NavigationBar = ({ float, theme }) => {
 	
 	const user = useContext(UserContext); 
+	const userService = new UserService();
 
 	const [ active, setActive ] = useState(false);
+	const [ profile, setProfile ] = useState();
+
+	useEffect(() => {
+
+
+		(async () => {
+
+			if(user) {
+				try {
+					const URL = await userService.getUserProfileURL(user.uid);
+					
+					setProfile(URL);
+				}
+				catch(error) {
+					console.log(error);
+				}
+			}
+
+		})();
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<>
 			<Nav float={float} theme={theme}>
-				<Container>
-					<Link to="/"><Image src={Logo} alt="The Arab Future" /></Link>
-				</Container>
-				<Container place="flex-end">
-					<UL active={active} theme={theme}>
-						<NavLink to="/articles" theme={theme}><li>مقالات</li></NavLink>
-						<NavLink to="/questions" theme={theme}><li>اسئلة</li></NavLink>
-						<NavLink to="/projects" theme={theme}><li>المشاريع</li></NavLink>
-						{!user ?
+				<Container place="flex-start">
+					{!user ?
 						
-							<NavLink to="/login" theme={theme}><li>تسجيل الدخول</li></NavLink> :
-							<NavLink to={"/profile/" + user.uid} theme={theme}><li>ملفي الشخصي</li></NavLink>
+						<Link to="/login" theme={theme}><ProfileImage src={DefaultUserProfileSource} alt="The Arab Future" /></Link> :
+						<Link to={"/profile/" + user.uid} theme={theme}><ProfileImage src={profile ? profile : DefaultUserProfileSource} alt="User" /></Link>
 
-						}
-					</UL>
+					}
 				</Container>
+				<UL active={active}>
+					<NavLink to="/articles" theme={theme}><li>مقالات</li></NavLink>
+					<NavLink to="/questions" theme={theme}><li>اسئلة</li></NavLink>
+					<NavLink to="/projects" theme={theme}><li>المشاريع</li></NavLink>
+				</UL>
+				<LogoContainer>
+					<Link to="/"><Image src="https://media.thearabfuture.com/logo/128x128.png" alt="The Arab Future" /></Link>
+				</LogoContainer>
 				<BarContainer>
-					<Button onClick={e => setActive(!active)} isActive={active}><FontAwesomeIcon icon={faBars} /></Button>
+					<Button onClick={e => setActive(!active)} isActive={active} theme={theme}><FontAwesomeIcon icon={faBars} /></Button>
 				</BarContainer>
 			</Nav>
 			{float && <NavHelper />}
