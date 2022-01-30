@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Logo from "../../static/images/logo512.png";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../../context/UserContext";
 
@@ -108,7 +107,7 @@ const NavigationBar = ({ float, theme }) => {
 		<>
 			<Nav float={float} theme={theme}>
 				<Container>
-					<Link to="/"><Image src={Logo} alt="The Arab Future" /></Link>
+					<Link to="/"><Image src="https://media.thearabfuture.com/logo/128x128.png" alt="The Arab Future" /></Link>
 				</Container>
 				<Container place="flex-end">
 					<UL active={active} theme={theme}>
