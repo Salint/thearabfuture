@@ -13,6 +13,12 @@ class AuthService {
 				username: username
 			});
 
+			await firebase.analytics().setUserId(userCredential.user.uid);
+
+			await firebase.analytics().logEvent("create_account", {
+				name: username
+			});
+
 		}
 		catch(error) {
 			throw error;
@@ -22,6 +28,8 @@ class AuthService {
 		try {
 			
 			await firebase.auth().signInWithEmailAndPassword(email, password);
+
+			await firebase.analytics().logEvent("login_account");
 
 		}
 		catch(error) {
@@ -52,6 +60,13 @@ class AuthService {
 
 			await firebase.firestore().collection("users").doc(userCredential.user.uid).set({
 				username: userCredential.user.displayName
+			});
+			
+			await firebase.analytics().setUserId(userCredential.user.uid);
+			
+			await firebase.analytics().logEvent("login_account_thirdparty", {
+				provider: authProvider,
+				username: userCredential.user.displayName	
 			});
 
 		}
