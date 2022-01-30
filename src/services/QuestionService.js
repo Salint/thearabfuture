@@ -15,16 +15,32 @@ class QuestionService {
 
 			for (const question of questionData.docs) {
 
-				const author = await userService.fetchUser(question.get("author"));
+				try {
 
-				questions.push({
-					id: question.id,
-					title: question.get("title"),
-					content: question.get("content"),
-					category: question.get("category"),
-					date: question.get("date").toDate(),
-					userData: author
-				});
+					const author = await userService.fetchUser(question.get("author"));
+
+					questions.push({
+						id: question.id,
+						title: question.get("title"),
+						content: question.get("content"),
+						category: question.get("category"),
+						date: question.get("date").toDate(),
+						userData: author
+					});
+				}
+				catch(error) {
+					questions.push({
+						id: question.id,
+						title: question.get("title"),
+						content: question.get("content"),
+						category: question.get("category"),
+						date: question.get("date").toDate(),
+						userData: {
+							id: "unknown",
+							username: "Unknown"
+						}
+					});
+				}
 
 			}
 
