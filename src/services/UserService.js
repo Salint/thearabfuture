@@ -9,11 +9,18 @@ class UserService {
 			const result = await firebase.firestore().collection("users").doc(uid).get();
 
 			if(result.exists) {
-				const isModerator = await this.isUserModerator(uid);
-				const isWriter = await this.isUserWriter(uid);
-				const profileURL = await this.getUserProfileURL(uid);
-				const bannerURL = await this.getUserBannerURL(uid);
-				const postCount = await this.getUserPostCount(uid);
+				const [ isModerator, 
+					isWriter,
+					profileURL,
+					bannerURL,
+					postCount
+				] = await Promise.all([
+					this.isUserModerator(uid),
+					this.isUserWriter(uid),
+					this.getUserProfileURL(uid),
+					this.getUserBannerURL(uid),
+					this.getUserPostCount(uid)
+				]);
 
 				return {
 					uid: uid,
@@ -90,10 +97,16 @@ class UserService {
 	async getUserPostCount(uid) {
 		
 		try {
-			
-			const questions = await firebase.firestore().collection("questions").where("author", "==", uid).get();
-			
-			const articles = await firebase.firestore().collection("articles").where("author", "==", uid).get();
+			const db = firebase.firestore();
+
+			const [ 
+				questions,
+				articles
+			] = await Promise.all([
+				db.collection("questions").where("author", "==", uid).get(),
+				db.collection("articles").where("author", "==", uid).get()
+			]);
+
 
 			return (questions.size + articles.size);
 
