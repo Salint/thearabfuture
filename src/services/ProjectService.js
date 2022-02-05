@@ -1,11 +1,8 @@
 import firebase from "./FirebaseService";
-import UserService from "./UserService";
 
 class ProjectService {
   
 	async fetchProjects() {
-		
-		const userService = new UserService();
 
 		try {
 
@@ -15,8 +12,6 @@ class ProjectService {
 			
 			for (const project of projectsResults.docs) {
 				
-				const user = await userService.fetchUser(project.get("user"));
-				
 				projects.push({
 					id: project.id,
 					title: project.get("title"),
@@ -25,7 +20,7 @@ class ProjectService {
 					link: project.get("link"),
 					email: project.get("email"),
 					isActive: project.get("isActive"),
-					userData: user
+					userData: project.get("author")
 				});
 			}
 			
