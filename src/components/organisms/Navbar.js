@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import UserContext from "../../context/UserContext";
 
+import Logo from "../../static/images/logo.png";
+
 import DefaultUserProfileSource from "../../static/images/user-default.png";
 import UserService from "../../services/UserService";
 
@@ -165,7 +167,7 @@ const NavigationBar = ({ float, theme }) => {
 					<NavLink to="/projects" theme={theme}><li>المشاريع</li></NavLink>
 				</UL>
 				<LogoContainer>
-					<Link to="/"><Image src="https://media.thearabfuture.com/logo/128x128.png" alt="The Arab Future" /></Link>
+					<Link to="/"><Image src={Logo} alt="The Arab Future" /></Link>
 				</LogoContainer>
 				<BarContainer>
 					<Button onClick={e => setActive(!active)} isActive={active} theme={theme}><FontAwesomeIcon icon={faBars} /></Button>
