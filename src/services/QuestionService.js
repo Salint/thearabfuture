@@ -5,46 +5,12 @@ class QuestionService {
 
 	async fetchQuestions() {
 
-		const userService = new UserService();
 
 		try {
-
-			let questions = [];
 			
-			const questionData = await firebase.firestore().collection("questions").orderBy("date", "desc").get();
+			const questions = await firebase.firestore().collection("questions").orderBy("date", "desc").get();
 
-			for (const question of questionData.docs) {
-
-				try {
-
-					const author = await userService.fetchUser(question.get("author"));
-
-					questions.push({
-						id: question.id,
-						title: question.get("title"),
-						content: question.get("content"),
-						category: question.get("category"),
-						date: question.get("date").toDate(),
-						userData: author
-					});
-				}
-				catch(error) {
-					questions.push({
-						id: question.id,
-						title: question.get("title"),
-						content: question.get("content"),
-						category: question.get("category"),
-						date: question.get("date").toDate(),
-						userData: {
-							id: "unknown",
-							username: "Unknown"
-						}
-					});
-				}
-
-			}
-
-			return questions;
+			return questions.docs;
 		}	
 		catch(error) {
 			throw error;
@@ -115,30 +81,19 @@ class QuestionService {
 
 				let answers = [];
 
-				const answerResult = await firebase.firestore().collection("questions").doc(id).collection("answers").orderBy("date", "asc").get();
+				const answersResult = await firebase.firestore().collection("questions").doc(id).collection("answers").orderBy("date", "asc").get();
 				
-				for (const answer of answerResult.docs) {
-					
-					const author = await userService.fetchUser(answer.get("author"));
-
+				answersResult.forEach(answer => {
 					answers.push({
-						id: answer.id,
-						content: answer.get("content"),
-						date: answer.get("date").toDate(),
-						userData: author
+						...answer.data(),
+						id: answer.id
 					});
-					
-				}
-				const author = await userService.fetchUser(question.get("author"));
+				});
 
 				return {
+					...question.data(),
 					id: question.id,
-					title: question.get("title"),
-					content: question.get("content"),
-					category: question.get("category"),
-					date: question.get("date").toDate(),
 					answers: answers,
-					userData: author
 				};
 			}
 			else {

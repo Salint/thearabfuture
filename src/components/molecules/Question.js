@@ -30,7 +30,7 @@ const Category = styled.h6`
 	color: var(--secondary-text);
 	margin-top: -3px;
 `;
-const Date = styled.h6`
+const DateElement = styled.h6`
 	font-size: 13px;
 	color: var(--secondary-text);
 	margin-top: -3px;
@@ -53,23 +53,18 @@ const UserContainerName = styled.p`
 	margin-right: 5px;
 `;
 
-const View = styled(Button)`
-	background: var(--main-color);
-	padding: 5px 10px;
-	margin-top: 10px;
-`;
 
 const Question = ({ question }) => {
 	
-	const { userData: user } = question;
+	const { title, category, date, author: user } = question.data();
 
 	return (
 		<Container to={"/questions/" + question.id}>
-			<Title>{question.title}</Title>
-			<Category>{question.category}</Category>
-			<Date>{question.date.toLocaleDateString()}</Date>
+			<Title>{title}</Title>
+			<Category>{category}</Category>
+			<DateElement>{date.toDate().toLocaleDateString()}</DateElement>
 			<UserContainer to={"/profile/" + user.uid}>
-				<UserContainerImage src={user.profileURL ? user.profileURL : DefaultUserProfileSource } alt={user.username} />
+				<UserContainerImage src={user.photoURL ? user.photoURL : DefaultUserProfileSource } alt={user.username} />
 				<UserContainerName>{user.username}</UserContainerName>
 			</UserContainer>
 		</Container>

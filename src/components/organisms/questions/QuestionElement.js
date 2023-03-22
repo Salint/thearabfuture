@@ -53,29 +53,28 @@ const Date = styled.h6`
 
 const QuestionElement = ({ question }) => {
 
-	const { title, userData: user, content, date, answers } = question;
-	
+	const { title, author: user, content, date, answers } = question;
+
 	return (
 		<QuestionSection>
 			<Title>{title}</Title>
-			<Date>{date.toLocaleDateString()}</Date>
+			<Date>{date.toDate().toLocaleDateString()}</Date>
 			<UserContainer to={"/profile/" + user.uid}>
-				<UserContainerImage src={user.profileURL ? user.profileURL : DefaultUserProfileSource } alt={user.username} />
+				<UserContainerImage src={user.photoURL ? user.photoURL : DefaultUserProfileSource } alt={user.username} />
 				<UserContainerName>{user.username}</UserContainerName>
 			</UserContainer>
 			<MarkdownView markdown={content} className="markdown-view"/>
-			{ answers.map(({ id, content, date, userData: user }) => 
+			{ answers.map(({ id, content, date, author: user }) => 
 				<Answer id={id}>
 					<UserContainer to={"/profile/" + user.uid}>
-						<UserContainerImage src={user.profileURL ? user.profileURL : DefaultUserProfileSource } alt={user.username} />
+						<UserContainerImage src={user.photoURL ? user.photoURL : DefaultUserProfileSource } alt={user.username} />
 						<UserContainerName>{user.username}</UserContainerName>
 					</UserContainer>
-					<Date>{date.toLocaleDateString()}</Date>
+					<Date>{date.toDate().toLocaleDateString()}</Date>
 					<br />
 					<MarkdownView markdown={content} className="markdown-view"/>	
 				</Answer>	
 			)}
-			 
 		</QuestionSection>
 	);
 };
