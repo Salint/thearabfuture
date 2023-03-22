@@ -104,7 +104,7 @@ const SettingsProfilePicture = () => {
 		cropper.getCroppedCanvas().toBlob(async (blob) => {
 			try {
 				
-				const url = await userService.updateProfilePicture(user, blob);
+				const url = await userService.updateProfilePicture(user.uid, blob);
 				await user.updateProfile({
 					photoURL: url
 				})
@@ -112,6 +112,7 @@ const SettingsProfilePicture = () => {
 			}
 			catch(error) {
 				setError(error.message);
+				console.log(error);
 				setPending(false);
 			}
 		});
