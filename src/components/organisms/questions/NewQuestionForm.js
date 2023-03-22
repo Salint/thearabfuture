@@ -105,7 +105,7 @@ const NewQuestionForm = () => {
 
 			try {
 				
-				await questionService.addQuestion(userContext.uid, input.title, input.category, input.content);
+				await questionService.addQuestion(userContext, input.title, input.category, input.content);
 				setSuccess(true);
 			}
 			catch(error) {

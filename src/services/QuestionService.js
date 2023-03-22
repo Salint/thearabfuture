@@ -153,11 +153,15 @@ class QuestionService {
 		}
 	}
 
-	async addQuestion(uid, title, category, content) {
+	async addQuestion(user, title, category, content) {
 
 		try {
 			await firebase.firestore().collection("questions").add({
-				author: uid,
+				author: {
+					uid: user.uid,
+					username: user.displayName,
+					photoURL: user.photoURL
+				},
 				title: title,
 				category: category,
 				content: content,
@@ -169,10 +173,14 @@ class QuestionService {
 		}
 	}
 
-	async addAnswer(id, uid, content) {
+	async addAnswer(id, user, content) {
 		try {
 			await firebase.firestore().collection("questions").doc(id).collection("answers").add({
-				author: uid,
+				author: {
+					uid: user.uid,
+					username: user.displayName,
+					photoURL: user.photoURL
+				},
 				content: content,
 				date: firebase.firestore.FieldValue.serverTimestamp()
 			})
