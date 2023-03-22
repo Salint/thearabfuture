@@ -5,18 +5,21 @@ import Button from "../atoms/Button";
 
 import DefaultUserProfileSource from "../../static/images/user-default.png";
 
-import ContainerBase from '../atoms/Container';
-
-const Container = styled(ContainerBase)`
-	background: var(--secondary-background);
-	margin: 30px auto;
-	padding: 20px 20px;
-	border: 1px solid var(--primary-border);
-	border-bottom: 5px solid var(--primary-border);
-	border-radius: 20px 20px 0 0;
+const Container = styled(Link)`
+	margin: 0 auto 10px;
+	padding: 30px 20px;
 	width: 600px;
+	display: block;
+	text-decoration: none;
+	color: var(--primary-text);
+
 	@media (max-width: 650px) {
 		width: 90%;
+	}
+
+	+ a {
+		
+		border-top: 1px solid var(--primary-border);
 	}
 `;
 const Title = styled.h1`
@@ -61,7 +64,7 @@ const Question = ({ question }) => {
 	const { userData: user } = question;
 
 	return (
-		<Container>
+		<Container to={"/questions/" + question.id}>
 			<Title>{question.title}</Title>
 			<Category>{question.category}</Category>
 			<Date>{question.date.toLocaleDateString()}</Date>
@@ -69,7 +72,6 @@ const Question = ({ question }) => {
 				<UserContainerImage src={user.profileURL ? user.profileURL : DefaultUserProfileSource } alt={user.username} />
 				<UserContainerName>{user.username}</UserContainerName>
 			</UserContainer>
-			<View to={"/questions/" + question.id} highlighted={true} width="100">عرض</View>
 		</Container>
 	);
 
