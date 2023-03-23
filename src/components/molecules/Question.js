@@ -65,7 +65,7 @@ const Question = ({ question }) => {
 			<DateElement>{date.toDate().toLocaleDateString()}</DateElement>
 			<UserContainer to={"/profile/" + user.uid}>
 				<UserContainerImage src={user.photoURL ? user.photoURL : DefaultUserProfileSource } alt={user.username} />
-				<UserContainerName>{user.username}</UserContainerName>
+				<UserContainerName>{user.username ? user.username : "Unknown"}</UserContainerName>
 			</UserContainer>
 		</Container>
 	);
