@@ -131,7 +131,7 @@ const SettingsForm = ({ user }) => {
 	const [ success, setSuccess ] = useState(false);
 	const [ input, setInput ] = useState({
 		username: username,
-		about: about
+		about: about ? ( about.length !== 0 ? about : "" ) : ""
 	});
 
 	const handleInput = (e) => {
