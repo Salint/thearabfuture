@@ -5,18 +5,21 @@ import Button from "../atoms/Button";
 
 import DefaultUserProfileSource from "../../static/images/user-default.png";
 
-import ContainerBase from '../atoms/Container';
-
-const Container = styled(ContainerBase)`
-	background: var(--secondary-background);
-	margin: 30px auto;
-	padding: 20px 20px;
-	border: 1px solid var(--primary-border);
-	border-bottom: 5px solid var(--primary-border);
-	border-radius: 20px 20px 0 0;
+const Container = styled(Link)`
+	margin: 0 auto 10px;
+	padding: 30px 20px;
 	width: 600px;
+	display: block;
+	text-decoration: none;
+	color: var(--primary-text);
+
 	@media (max-width: 650px) {
 		width: 90%;
+	}
+
+	+ a {
+		
+		border-top: 1px solid var(--primary-border);
 	}
 `;
 const Title = styled.h1`
@@ -27,7 +30,7 @@ const Category = styled.h6`
 	color: var(--secondary-text);
 	margin-top: -3px;
 `;
-const Date = styled.h6`
+const DateElement = styled.h6`
 	font-size: 13px;
 	color: var(--secondary-text);
 	margin-top: -3px;
@@ -50,26 +53,20 @@ const UserContainerName = styled.p`
 	margin-right: 5px;
 `;
 
-const View = styled(Button)`
-	background: var(--main-color);
-	padding: 5px 10px;
-	margin-top: 10px;
-`;
 
 const Question = ({ question }) => {
 	
-	const { userData: user } = question;
+	const { title, category, date, author: user } = question.data();
 
 	return (
-		<Container>
-			<Title>{question.title}</Title>
-			<Category>{question.category}</Category>
-			<Date>{question.date.toLocaleDateString()}</Date>
+		<Container to={"/questions/" + question.id}>
+			<Title>{title}</Title>
+			<Category>{category}</Category>
+			<DateElement>{date.toDate().toLocaleDateString()}</DateElement>
 			<UserContainer to={"/profile/" + user.uid}>
-				<UserContainerImage src={user.profileURL ? user.profileURL : DefaultUserProfileSource } alt={user.username} />
-				<UserContainerName>{user.username}</UserContainerName>
+				<UserContainerImage src={user.photoURL ? user.photoURL : DefaultUserProfileSource } alt={user.username} />
+				<UserContainerName>{user.username ? user.username : "Unknown"}</UserContainerName>
 			</UserContainer>
-			<View to={"/questions/" + question.id} highlighted={true} width="100">عرض</View>
 		</Container>
 	);
 

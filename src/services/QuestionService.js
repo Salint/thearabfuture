@@ -5,46 +5,12 @@ class QuestionService {
 
 	async fetchQuestions() {
 
-		const userService = new UserService();
 
 		try {
-
-			let questions = [];
 			
-			const questionData = await firebase.firestore().collection("questions").orderBy("date", "desc").get();
+			const questions = await firebase.firestore().collection("questions").orderBy("date", "desc").get();
 
-			for (const question of questionData.docs) {
-
-				try {
-
-					const author = await userService.fetchUser(question.get("author"));
-
-					questions.push({
-						id: question.id,
-						title: question.get("title"),
-						content: question.get("content"),
-						category: question.get("category"),
-						date: question.get("date").toDate(),
-						userData: author
-					});
-				}
-				catch(error) {
-					questions.push({
-						id: question.id,
-						title: question.get("title"),
-						content: question.get("content"),
-						category: question.get("category"),
-						date: question.get("date").toDate(),
-						userData: {
-							id: "unknown",
-							username: "Unknown"
-						}
-					});
-				}
-
-			}
-
-			return questions;
+			return questions.docs;
 		}	
 		catch(error) {
 			throw error;
@@ -115,30 +81,19 @@ class QuestionService {
 
 				let answers = [];
 
-				const answerResult = await firebase.firestore().collection("questions").doc(id).collection("answers").orderBy("date", "asc").get();
+				const answersResult = await firebase.firestore().collection("questions").doc(id).collection("answers").orderBy("date", "asc").get();
 				
-				for (const answer of answerResult.docs) {
-					
-					const author = await userService.fetchUser(answer.get("author"));
-
+				answersResult.forEach(answer => {
 					answers.push({
-						id: answer.id,
-						content: answer.get("content"),
-						date: answer.get("date").toDate(),
-						userData: author
+						...answer.data(),
+						id: answer.id
 					});
-					
-				}
-				const author = await userService.fetchUser(question.get("author"));
+				});
 
 				return {
+					...question.data(),
 					id: question.id,
-					title: question.get("title"),
-					content: question.get("content"),
-					category: question.get("category"),
-					date: question.get("date").toDate(),
 					answers: answers,
-					userData: author
 				};
 			}
 			else {
@@ -153,11 +108,15 @@ class QuestionService {
 		}
 	}
 
-	async addQuestion(uid, title, category, content) {
+	async addQuestion(user, title, category, content) {
 
 		try {
 			await firebase.firestore().collection("questions").add({
-				author: uid,
+				author: {
+					uid: user.uid,
+					username: user.displayName,
+					photoURL: user.photoURL
+				},
 				title: title,
 				category: category,
 				content: content,
@@ -169,10 +128,14 @@ class QuestionService {
 		}
 	}
 
-	async addAnswer(id, uid, content) {
+	async addAnswer(id, user, content) {
 		try {
 			await firebase.firestore().collection("questions").doc(id).collection("answers").add({
-				author: uid,
+				author: {
+					uid: user.uid,
+					username: user.displayName,
+					photoURL: user.photoURL
+				},
 				content: content,
 				date: firebase.firestore.FieldValue.serverTimestamp()
 			})

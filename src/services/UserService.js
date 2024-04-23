@@ -165,7 +165,11 @@ class UserService {
 		
 		try {
 			
-			await firebase.storage().ref("users").child(uid).child("profile.jpg").put(profileData, { contentType: "image/jpeg" });
+			const ref = await firebase.storage().ref("users").child(uid).child("profile.jpg");
+			
+			await ref.put(profileData, { contentType: "image/jpeg" });
+
+			return (await ref.getDownloadURL());
 		}
 		catch(error) {
 			throw error;

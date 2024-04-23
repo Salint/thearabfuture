@@ -8,14 +8,16 @@ class AuthService {
 			const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
 
 			await userCredential.user.sendEmailVerification();
-
+			await userCredential.user.updateProfile({
+				displayName: username
+			})
 			await firebase.firestore().collection("users").doc(userCredential.user.uid).set({
-				username: username
+				username
 			});
 
-			await firebase.analytics().setUserId(userCredential.user.uid);
+			firebase.analytics().setUserId(userCredential.user.uid);
 
-			await firebase.analytics().logEvent("create_account", {
+			firebase.analytics().logEvent("create_account", {
 				name: username
 			});
 

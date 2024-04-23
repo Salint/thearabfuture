@@ -112,7 +112,7 @@ const AnswerForm = ({ id }) => {
 
 			try {
 				
-				await questionService.addAnswer(id, userContext.uid, input);
+				await questionService.addAnswer(id, userContext, input);
 				setSuccess(true);
 			}
 			catch(error) {

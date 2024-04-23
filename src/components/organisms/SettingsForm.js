@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import UserService from "../../services/UserService";
@@ -11,6 +11,7 @@ import DefaultUserProfileSource from "../../static/images/user-default.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import UserContext from "../../context/UserContext";
 
 const Form = styled.form`
 	
@@ -120,6 +121,8 @@ const Button = styled.button`
 
 const SettingsForm = ({ user }) => {
 
+	const userObj = useContext(UserContext);
+
 	const userService = new UserService();
 	const { uid, username, about, profileURL, bannerURL } = user;
 
@@ -128,7 +131,7 @@ const SettingsForm = ({ user }) => {
 	const [ success, setSuccess ] = useState(false);
 	const [ input, setInput ] = useState({
 		username: username,
-		about: about
+		about: about ? ( about.length !== 0 ? about : "" ) : ""
 	});
 
 	const handleInput = (e) => {
@@ -153,6 +156,9 @@ const SettingsForm = ({ user }) => {
 			try {
 
 				await userService.updateUser(uid, input.username, input.about);
+				await userObj.updateProfile({
+					displayName: input.username
+				})
 
 				setSuccess(true);
 			}
